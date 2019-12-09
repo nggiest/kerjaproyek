@@ -120,7 +120,7 @@
                     <div class="form-group ">
                         <button type="submit" class="btn btn-primary float-right">
                                         Create</button> </form>
-                        <form action="{{route('users.index')}}"><button type="submit" class="btn btn-primary pull-left">Back To List User</button></form>
+                        <form action="{{route('user.index')}}"><button type="submit" class="btn btn-primary pull-left">Back To List User</button></form>
                     </div>
                 </div>
             </div>
