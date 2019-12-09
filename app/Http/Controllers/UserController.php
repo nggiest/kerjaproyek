@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use Alert;
 use Illuminate\Http\Request;
 use Validator;
 use Illuminate\Support\Facades\Hash;
@@ -19,7 +20,7 @@ class UserController extends Controller
     public function index()
     {
         $user = User::all();
-        return view('users.show');
+        return view('users.index', compact('user'));
     }
 
     /**
@@ -68,8 +69,8 @@ class UserController extends Controller
         ]);
         //$uploadphoto->storeAs($destinationPath,$photo);
 
+        Alert::message('User save successfully','Success');
         return redirect()->route('user.show');
-
     }
 
     /**
@@ -94,14 +95,14 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        if (Auth::check())
-        {
+        // if (Auth::check())
+        // {
             $user=User::findOrFail($id);
-            return view('user.edit', compact('user'));
-        }
-        else {
-            return redirect()->route('login');
-        }
+            return view('users.edit', compact('user'));
+        // }
+        // else {
+        //     return redirect()->route('login');
+        // }
    
     }
 

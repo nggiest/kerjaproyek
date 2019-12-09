@@ -14,28 +14,35 @@
                 <table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
                     <thead>
                         <tr role="row">
-                        <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Rendering engine</th>
-                        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">Browser</th>
-                        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending">Platform(s)</th>
-                        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending">Engine version</th>
-                        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">CSS grade</th>
+                        <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">No</th>
+                        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">Nama</th>
+                        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending">Jabatan</th>
+                        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending">Status Keanggotaan</th>
+                        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">Action</th>
                         </tr>
                     </thead>
                     <tbody>
+                    @php (
+                        $no = 1
+                        )
+                    @foreach($user as $users)
+                   
                       <tr role="row" class="odd">
-                        <td class="sorting_1">Gecko</td>
-                        <td>Firefox 1.0</td>
-                        <td>Win 98+ / OSX.2+</td>
-                        <td>1.7</td>
-                        <td>A</td>
+                        <td>{{$no++}}</td>
+                        <td>{{$users->name}}</td>
+                        <td>{{$users->role == 1 ? 'Dosen' : 'Asisten Lab'}}</td>
+                        <td>{{$users->statuses}}</td>
+                        <td style="text-align:center"> <form action="{{route('user.edit', $users->id)}}">  
+                        <button class="btn btn-success" type="submit" value="Edit"> Edit </button> </form> </td>
+                    @endforeach
                       </tr>
                     </tbody>
                     <tfoot>
-                        <tr><th rowspan="1" colspan="1">Rendering engine</th>
-                        <th rowspan="1" colspan="1">Browser</th>
-                        <th rowspan="1" colspan="1">Platform(s)</th>
-                        <th rowspan="1" colspan="1">Engine version</th>
-                        <th rowspan="1" colspan="1">CSS grade</th></tr>
+                        <tr><th rowspan="1" colspan="1">No</th>
+                        <th rowspan="1" colspan="1">Nama</th>
+                        <th rowspan="1" colspan="1">Jabatan</th>
+                        <th rowspan="1" colspan="1">Status</th>
+                        <th rowspan="1" colspan="1">Action</th></tr>
                     </tfoot>
                 </table>
             </div>
