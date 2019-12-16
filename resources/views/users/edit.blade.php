@@ -27,7 +27,7 @@
                 <label for="nim" class="col-sm-2 control-label">NIM</label>
 
                 <div class="col-md-9">
-                    <input id="nim" type="text" class="form-control" name="nim" required autofocus>
+                    <input id="nim" type="text" class="form-control" name="nim" value='{{$user->nim}}' required autofocus>
 
                     @if ($errors->has('nim'))
                         <span class="help-block">
@@ -41,7 +41,7 @@
                 <label for="email" class="col-sm-2 control-label">E-Mail Address</label>
 
                 <div class="col-md-9">
-                    <input id="email" type="email" class="form-control" name="email" required>
+                    <input id="email" type="email" class="form-control" name="email" value='{{$user->email}}' required>
 
                     @if ($errors->has('email'))
                         <span class="help-block">
@@ -50,36 +50,14 @@
                     @endif
                 </div>
             </div>
-
-            <div class="form-group {{ $errors->has('password') ? ' has-error' : '' }}">
-                <label for="password" class="col-sm-2 control-label">Password</label>
-
-                <div class="col-md-9">
-                                <input id="password" type="password" class="form-control" name="password"  required>
-
-                                @if ($errors->has('password'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label for="password-confirm" class="col-sm-2 control-label">Confirm Password</label>
-
-                <div class="col-md-9">
-                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
-                </div>
-            </div>
-                        
+    
             <div class="form-group{{ $errors->has('status_id') ? ' has-error' : '' }}">
                 <label for="activation" class="col-sm-2 control-label">Activation Status</label>
                 <div class="col-md-9">
                     <select name="status_id" id="status_id" class="form-control select2" >
                         <option name="status_id" id="status_id" value="">---Select Status---</option>
-                        <option name="status_id" id="status_id" value="{{$data = 1 }}"> Active User </option>
-                        <option name="status_id" id="status_id" value="{{$data = 0 }}"> Non Active User </option>
+                        <option name="status_id" id="status_id" value="{{$data = 1 }}" {{ $user->status_id  == $data ? 'selected' : '' }}> Active User </option>
+                        <option name="status_id" id="status_id" value="{{$data = 0 }}" {{ $user->status_id  == $data ? 'selected' : '' }}> Non Active User </option>
                     </select>
                     @if ($errors->has('status_id'))
                         <span class="help-block">

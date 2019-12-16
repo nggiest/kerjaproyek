@@ -35,19 +35,20 @@
           <i class="far fas fa-user-alt"></i>
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+        @if (Auth::User())
          <a href="{{ route('logout') }}" class ="dropdown-item" class="btn btn-block btn-outline-primary " onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
             <!-- Message Start -->
             <div class="media">
               <div class="media-body">
-             Logout 
+                 Logout 
                   <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                             {{ csrf_field() }}
                                         </form>
-             
               </div>
             </div>
             <!-- Message End -->
           </a>
+          @else
           <a href="{{ route('login') }}" class ="dropdown-item" class="btn btn-block btn-outline-primary">
             <!-- Message Start -->
             <div class="media">
@@ -66,6 +67,7 @@
             </div>
             <!-- Message End -->
           </a>
+          @endif
         </div>
       </li>
       <!-- Notifications Dropdown Menu -->
@@ -88,7 +90,7 @@
           <img src="" class="img-circle elevation-2" alt="">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Nama Aslab</a>
+          <a href="#" class="d-block">{{Auth::User()->name}}</a>
         </div>
       </div>
 

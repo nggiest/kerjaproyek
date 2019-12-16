@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\User;
-use Alert;
 use Illuminate\Http\Request;
+use DB;
 use Validator;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
@@ -20,6 +20,11 @@ class UserController extends Controller
     public function index()
     {
         $user = User::all();
+        $user = DB::table('users')
+        ->join('status', 'status.id','=', 'users.status_id')
+        ->select('users.*','status.nama_status as statuses')
+        ->get();
+
         return view('users.index', compact('user'));
     }
 
@@ -69,7 +74,7 @@ class UserController extends Controller
         ]);
         //$uploadphoto->storeAs($destinationPath,$photo);
 
-        Alert::message('User save successfully','Success');
+        //Alert::message('User save successfully','Success');
         return redirect()->route('user.show');
     }
 
