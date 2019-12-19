@@ -7,7 +7,7 @@
         <form class="form-horizontal" method="POST" action="{{ route('inventaris.update', $inventaris->id ) }}">
         {{ method_field('PUT') }}
              {{ csrf_field() }}
-             <input type="hidden" name="update_by" id="update_by" value="{{Auth:user()->id}}">
+             <input type="hidden" name="update_by" id="update_by" value="{{Auth::user()->id}}">
             <div class="form-group{{ $errors->has('jenis_barang') ? ' has-error' : '' }}">
 
                 <label for="jenis_barang" class="col-sm-2 control-label">Jenis Barang</label>

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Inventaris;
 use App\User;
+use Validator;
+use DB;
 class InventarisController extends Controller
 {
     /**
@@ -15,10 +17,6 @@ class InventarisController extends Controller
     public function index()
     {
         $inventaris = Inventaris::all();
-        $inventaris = DB::table('inventaris')
-                      ->join('users','users.id', '=', 'inventaris.upload_by' )
-                      ->select('users.*','users.name as pengguna')
-                      ->get();
         return view('inventaries.index', compact('inventaris'));
     }
 
@@ -43,15 +41,16 @@ class InventarisController extends Controller
         $inventaris = Inventaris::all();
         $this->validate($request, [
             'jenis_barang' => 'required|string|min:2|max:128',
-            'jumlah_barang' => 'required|integer',
+            'jumlah' => 'required',
         ]);
 
-        Inventaris::create([
-            'jenis_barang' => $request->jenis_barang,
-            'jumlah_barang' => $request->jumlah_barang,
-            'upload_by' => $request->upload_by,
-        ]);
-
+       $inventaris =  Inventaris::create([
+            'jenis_barang' => $request['jenis_barang'],
+            'jumlah' => $request['jumlah'],
+            'update_by' => $request['update_by'],
+            ]);
+            
+        // return $request;
         return redirect()->route('inventaris.index');
 
     }
@@ -76,7 +75,7 @@ class InventarisController extends Controller
     public function edit($id)
     {
         $inventaris = Inventaris::findOrFail($id);
-        return view('inventaris.edit', compact('inventaris'));
+        return view('inventaries.edit', compact('inventaris'));
     }
 
     /**
@@ -91,13 +90,13 @@ class InventarisController extends Controller
         $inventaris = Inventaris::findOrFail($id);
         $this->validate($request, [
             'jenis_barang' => 'required|string|min:2|max:128',
-            'jumlah_barang' => 'required|integer',
+            'jumlah' => 'required|integer',
         ]);
 
-        Inventaris::update([
-            'jenis_barang' => $request->jenis_barang,
-            'jumlah_barang' => $request->jumlah_barang,
-            'upload_by' => $request->upload_by,
+        $inventaris->update([
+            'jenis_barang' => $request['jenis_barang'],
+            'jumlah' => $request['jumlah'],
+            'update_by' => $request['update_by'],
         ]);
 
         return redirect()->route('inventaris.index');

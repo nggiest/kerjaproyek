@@ -9,13 +9,14 @@
             <div class="row"><div class="col-sm-12 col-md-6"></div>
             <div class="col-sm-12 col-md-6"></div>
         </div>
+        
         <div class="row">
             <div class="col-sm-12">
+            <a href="{{route('inventaris.create')}}"><button type="button" class="btn btn-block btn-primary btn-lg"> Tambah Data Inventaris </a> </button>
                 <table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
                     <thead>
                         <tr role="row">
                         <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">No</th>
-                        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">Nomor</th>
                         <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending">Jenis Barang</th>
                         <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending">Jumlah</th>
                         <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">Action</th>
@@ -25,13 +26,13 @@
                     @php (
                         $no = 1
                         )
-                    @foreach($inventaris as $inventaris)
+                    @foreach($inventaris as $inventaries)
                    
                       <tr role="row" class="odd">
                         <td>{{$no++}}</td>
-                        <td>{{$inventaris->jenis_barang}}</td>
-                        <td>{{$inventaris->jumlah_barang}}</td>
-                        <td style="text-align:center"> <form action="{{route('user.edit', $users->id)}}">  
+                        <td>{{$inventaries->jenis_barang}}</td>
+                        <td>{{$inventaries->jumlah}}</td>
+                        <td style="text-align:center"> <form action="{{route('inventaris.edit', $inventaries->id)}}">  
                         <button class="btn btn-success" type="submit" value="Edit"> Edit </button> </form> </td>
                     @endforeach
                       </tr>

@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Jadwallab;
+use App\Hari;
+use DB;
+use Validator;
 
 class JadwallabController extends Controller
 {
@@ -13,7 +17,8 @@ class JadwallabController extends Controller
      */
     public function index()
     {
-        //
+        $jadwallab = Jadwallab::all();
+        return view('jadwallabs.index', compact('jadwallab'));
     }
 
     /**

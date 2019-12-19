@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Inventaris extends Model
 {
     protected $fillable =[
-        'jenis_barang', 'jumlah_barang', 'upload_by',
+        'jenis_barang', 'jumlah', 'update_by',
     ];
 
     public function users(){

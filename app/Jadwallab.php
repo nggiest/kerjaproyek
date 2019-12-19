@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Jadwallab extends Model
 {
-    //
+    public $table = 'jadwallab';
 }

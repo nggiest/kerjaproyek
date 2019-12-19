@@ -2,32 +2,17 @@
 @section('content')
 <div class="card card-primary">
 <div class="card-header">
-<div class="card-title"> <h3 style="text-align:center"> Create User </h3> </div> </div>
+<div class="card-title"> <h3 style="text-align:center"> Tambah Inventaris Baru </h3> </div> </div>
     <div class="card-body">
-        <form class="form-horizontal" method="POST" action="{{ route('user.store')}}">
+        <form class="form-horizontal" method="POST" action="{{ route('inventaris.store')}}">
             {{ csrf_field() }}
-            <input type="hidden" name="update_by" id="update_by" value="{{Auth:user()->id}}">
-            <div class="form-group{{ $errors->has('id') ? ' has-error' : '' }}">
-
-                <label for="id" class="col-sm-2 control-label">ID</label>
-
-                <div class="col-md-9">
-                    <input id="id" type="text" class="form-control" name="id" required autofocus>
-
-                    @if ($errors->has('id'))
-                        <span class="help-block">
-                            <strong>{{ $errors->first('id') }}</strong>
-                        </span>
-                    @endif
-                </div>
-            </div>
-
+            <input type="hidden" name="update_by" id="update_by" value="{{Auth::user()->id}}">
             <div class="form-group{{ $errors->has('jenis_barang') ? ' has-error' : '' }}">
 
                 <label for="jenis_barang" class="col-sm-2 control-label">Jenis Barang</label>
 
                 <div class="col-md-9">
-                    <input id="jenis_barang" type="text" class="form-control" name="jenis_barang" required autofocus>
+                    <input id="jenis_barang" type="integer" class="form-control" name="jenis_barang" required autofocus>
 
                     @if ($errors->has('jenis_barang'))
                         <span class="help-block">
@@ -42,7 +27,7 @@
                 <label for="jumlah" class="col-sm-2 control-label">Jumlah</label>
 
                 <div class="col-md-9">
-                    <input id="jumlah" type="text" class="form-control" name="jumlah" required autofocus>
+                    <input id="jumlah" type="integer" class="form-control" name="jumlah" required autofocus>
 
                     @if ($errors->has('jumlah'))
                         <span class="help-block">
@@ -67,8 +52,8 @@
                
                     <div class="form-group ">
                         <button type="submit" class="btn btn-primary float-right">
-                                        Create</button> </form>
-                        <form action="{{route('user.index')}}"><button type="submit" class="btn btn-primary pull-left">Back To List User</button></form>
+                                        Tambah</button> </form>
+                        <form action="{{route('user.index')}}"><button type="submit" class="btn btn-primary pull-left">Kembali ke Inventaris</button></form>
                     </div>
                 </div>
             </div>
