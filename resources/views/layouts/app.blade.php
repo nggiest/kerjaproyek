@@ -32,7 +32,7 @@
       <!-- Messages Dropdown Menu -->
       <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">
-          <i class="far fas fa-user-alt"></i>
+          <i class="fas fa-user-alt"></i>
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
         @if (Auth::User())
@@ -119,34 +119,34 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{route('lab.index')}}" class="nav-link">
-                  <i class=" fas fa-circle nav-icon"></i>
+                <a href="{{route('home')}}" class="nav-link">
+                  <i class=" far fa-circle nav-icon"></i>
                   <p>Jadwal Penggunaan Lab</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="./index2.html" class="nav-link">
-                  <i class=" fas fa-circle nav-icon"></i>
+                <a href="{{route('aslab.index')}}" class="nav-link">
+                  <i class=" far fa-circle nav-icon"></i>
                   <p>Jadwal Asisten Lab</p>
                 </a>
               </li>
               @if (Auth::User())
               <li class="nav-item">
                 <a href="{{route('inventaris.index')}}" class="nav-link">
-                  <i class=" fas fa-circle nav-icon"></i>
+                  <i class="far fa-circle nav-icon"></i>
                   <p>Inventaris</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="{{route('report.index')}}" class="nav-link">
-                  <i class=" fas fa-circle nav-icon"></i>
+                <i class="far fa-circle nav-icon"></i>
                   <p>Laporan Harian</p>
                 </a>
               </li>
               
               <li class="nav-item">
                 <a href="{{ route('user.index') }}" class="nav-link">
-                  <i class=" fas fa-circle nav-icon"></i>
+                  <i class=" far fa-circle nav-icon"></i>
                   <p>Pengguna</p>
                 </a>
               </li>

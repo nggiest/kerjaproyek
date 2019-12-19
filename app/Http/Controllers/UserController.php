@@ -23,6 +23,7 @@ class UserController extends Controller
         $user = DB::table('users')
         ->join('status', 'status.id','=', 'users.status_id')
         ->select('users.*','status.nama_status as statuses')
+        ->orderBy('name')
         ->get();
 
         return view('users.index', compact('user'));

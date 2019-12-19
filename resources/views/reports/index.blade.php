@@ -1,21 +1,28 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="box box-primary">
-  <div class="box-title"> <h3 style="text-align:center"> Report List</h3> 
+<div class="card card-primary">
+  <div class="card-header">
+  <div class="card-title"> <h3 style="text-align:center"> Laporan Harian</h3> 
   </div>
-  <div class="box-body">
+  </div>
+  <div class="card-body">
+  <div class="col-sm-12"><form action="{{route('report.create')}}">
+        <button type="submit" class="btn btn-success btn-sm float-right"> <i class="fas fa-plus-circle"> </i>  Tambah Laporan Baru </button> 
+        </form></div>
+  </div>
   {{csrf_field()}}
   @php (
     $no = 1
   )
+  <form method="
   <div class="table-responsive" >
       <table id="" class="table table-bordered table-hover">
         <thead>
           <tr>
-            <th style="text-align:center">No</th>
+            <th style="text-align:center" >No</th>
             <th style="text-align:center" class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column descending" style="width: 217.8px;" aria-sort="ascending">Date</th>
-            <th style="text-align:center" >Number of Activity</th>
+            <th style="text-align:center" >Laporan Harian</th>
             <th colspan="3" style="text-align:center">Action</th>
                       
           </tr>
@@ -30,11 +37,11 @@
             <tr>
                 <td style="text-align:center">{{$no++}}</td>
                 <td style="text-align:center">{{$reports->date}}</td>
-                <td style="text-align:center" >{{$reports-></td>
+                <td style="text-align:center" >{{$reports->reported}}</td>
                 <td> 
 
                   <button class="btn btn-success view-report" type="button" data-toggle="modal" data-target="#modal-report" onClick="view_report({{$reports->id}})">
-                  <i class="fa fa-fw fa-eye"> </i> Read
+                  <i class="fa fa-fw fa-eye"> </i> Edit
                   </button> 
                 </td> 
                 <td>
@@ -56,7 +63,7 @@
       </table>
   </div>
               
-                  <div class="modal fade" id="modal-report">
+                  <!-- <div class="modal fade" id="modal-report">
                       <div class="modal-dialog">
                         <div class="modal-content">
                           <div class="modal-header">
@@ -70,7 +77,7 @@
                                   <tr>
                                     <th>No</th>
                                     <th>Activity</th>
-                                    @if(Auth::User()->role == 2)
+                                    @if(Auth::User()->role == 1)
                                     <th>Pengguna</th>
                                     @endif
                                   </tr>
@@ -91,7 +98,7 @@
                         <!-- /.modal-content -->
                       </div>
                       <!-- /.modal-dialog -->
-                  </div>
+                  </div> -->
                   <form action="{{route('home')}}"><button type="submit" class="btn btn-primary">Back Home</button></form>
                   <form action="" method="POST" class="remove-record-model">
                     {{csrf_field()}}

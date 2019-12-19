@@ -6,20 +6,25 @@
     </div>
     <div class="card-body">
         <div id="example2_wrapper" class="dataTables_wrapper dt-bootstrap4">
-            <div class="row"><div class="col-sm-12 col-md-6"></div>
+            <div class="row">
+            <div class="col-sm-12"><form action="{{route('user.create')}}">
+        <button type="submit" class="btn btn-warning btn-sm float-right"> <i class="fas fa-plus-circle"> </i>  Tambah Pengguna Baru </button> 
+        </form></div>
             <div class="col-sm-12 col-md-6"></div>
         </div>
+        
+        <br>
         <div class="row">
             <div class="col-sm-12">
-                <table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
+                <table id="example2" class="table table-bordered table-hover">
                     <thead>
                         <tr role="row">
                         <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">No</th>
-                        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">Nama</th>
-                        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending">Jabatan</th>
+                        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" role="columnheader"  aria-sort="ascending">Nama</th>
+                        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" >Jabatan</th>
                         @if(Auth::user()->role == 1 )
-                        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending">Status Keanggotaan</th>
-                        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">Action</th>
+                        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" >Status Keanggotaan</th>
+                        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" >Action</th>
                         @endif
                         </tr>
                     </thead>
@@ -36,7 +41,7 @@
                         @if(Auth::user()->role == 1 )
                         <td>{{$users->statuses}}</td>
                         <td style="text-align:center"> <form action="{{route('user.edit', $users->id)}}">  
-                        <button class="btn btn-success" type="submit" value="Edit"> Edit </button> </form> </td>
+                        <button class="btn btn-success" type="submit" value="Edit"> <i class="far fa-edit"> </i> Edit </button> </form> </td>
                         @endif
                     @endforeach
                       </tr>
@@ -91,4 +96,20 @@
     </div>
     </div>
 </div>
+@endsection
+
+@section('script')
+<script>
+  $(function () {
+    $("#example1").DataTable();
+    $('#example2').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false,
+    });
+  });
+</script>
 @endsection

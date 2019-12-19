@@ -43,4 +43,8 @@ class User extends Authenticatable
     public function inventaris(){
         return $this->hasMany(App\Inventaris);
     }
+
+    public function report(){
+        return $this->hasMany(App\Report);
+    }
 }

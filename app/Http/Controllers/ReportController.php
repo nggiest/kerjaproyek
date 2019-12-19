@@ -19,22 +19,25 @@ class ReportController extends Controller
      */
     public function index()
     {
-        if (Auth::User()->role == 2)
+        if (Auth::User()->role == 1)
         {
             $report = Report::all();
             foreach ($report as $reports) {
-                $reports->repact = ReportActivity::where('report_id',$reports->id)->get();
-                // $reports->repact = ReportActivity::all();
-                $reports->reportcount = DB::table('reportactivity')->select(DB::Raw('count(report_id) as countid'))->groupBy('report_id')->where('report_id', $reports->id)->first(); 
+            $reports->repact = DB::table('report')
+                ->join('reportdaily', 'report.id','=', 'reportdaily.report_id')
+                ->select('report.*','reportdaily.report_note as reported')
+                ->orderBy('date')
+                ->get();
             }
         }
         else 
         {
             $report = Report::select('*')->where('user', Auth::user()->id)->get();
             foreach ($report as $reports) {
-                $reports->repact = ReportActivity::where('report_id',$reports->id)->get();
-                // $reports->repact = ReportActivity::all();
-                //$reports->reportcount = DB::table('reportactivity')->select(DB::Raw('count(report_id) as countid'))->groupBy('report_id')->where('report_id', $reports->id)->first(); 
+                $reports->repact=DB::table('report')
+                ->join('reportdaily', 'report.id','=', 'reportdaily.report_id')
+                ->select('report.*','reportdaily.report_note as reported')
+                ->get();
             }
 
         }
@@ -90,7 +93,7 @@ class ReportController extends Controller
             Alert::error('Report Duplicated', 'Error'); 
             // Note any method of class PDOException can be called on $ex.
           }
-                return redirect('/daily');
+                return redirect('/report');
            
     }
 

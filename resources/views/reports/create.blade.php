@@ -2,9 +2,9 @@
 
 @section('content')
 <div class="container">
-    <form id="giomales" method="POST" action="{{ route('daily.store')}}">
+    <form id="giomales" method="POST" action="{{ route('report.store')}}">
             <div class="card card-primary">
-                <div class="card-header"><h3 style="text-align:center">Daily Report </h3></div>
+                <div class="card-header"><h3 style="text-align:center">Buat Laporan Harian </h3></div>
                 <div class="card-body">
                     <div class="form-horizontal" >
                         {{ csrf_field() }}
@@ -18,16 +18,17 @@
                     </div>
                 </div>
             </div>
-            <button type ="button" class="btn btn-success" id="btn1"> <i class="fa fa-plus-circle"> </i> Activities </button> <br> <br>
-            <div id="card-activities">
-              <div class="card card-primary cloningan" id="myactivities">
-                  <div class="card-title"><h3 style="text-align:center"> My Report 
-                    <button class="btn btn-card-tool delbutton" type="button"><i class="fa fa-times"></i></button> </h3>
-                  </div>
+            <button type ="button" class="btn btn-success" id="button1"> <i class="fa fa-plus-circle"> </i> Aktifitas </button> <br> <br>
+            <div id="card-activities" class="cloningan" id="myactivities">
+             <button class="btn btn-card-tool float-right delbutton" type="button"><i class="fas fa-trash"></i></button> 
+              <div class="card card-primary">
+                  <div class="card-title"><h3 style="text-align:center"> Laporan
+                   </h3>
+                </div>
                   <div class="card-body" id="activitycard">
                     <div class="form-horizontal">
                       <div class="form-group">
-                        <label for="" class="col-md-2">Detail Activity</label>
+                        <label for="" class="col-md-2">Rincian Laporan</label>
                           <div class="col-md-9">
                         <input type="text" class="form-control ini" id="report_note" name="report_note" placeholder="Detail Activity">
                           </div>
@@ -38,8 +39,8 @@
               </div>
             </div>
             <div class="card-footer">
-              <button type="submit" class="btn btn-primary float-right">Submit</button>  </form> 
-              <form action="{{route('daily.index')}}"><button type="submit" class="btn btn-primary pull-left">Back To Report List</button></form>
+              <button type="submit" class="btn btn-primary float-right">Tambah</button>  </form> 
+              <form action="{{route('report.index')}}"><button type="submit" class="btn btn-primary pull-left">Kembali ke Daftar Report </button></form>
             </div> 
           </div>
           
@@ -49,13 +50,13 @@
 @endsection
 
 @section('script')
+<script src="{{ mix('js/app.js') }}"></script>
 <script>  
 
 var count = 1;
-
  
           // Global unique counter
-    $('#btn1').click(function() {
+    $('#button1').click(function() {
         count++; // Increment counter
         $('.cloningan:first').clone(true).appendTo('#card-activities'). // Clone and append
           filter('[id]').each(function() { // For each new item with an ID
