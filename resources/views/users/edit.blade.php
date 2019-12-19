@@ -2,11 +2,12 @@
 @section('content')
 <div class="card card-primary">
 <div class="card-header">
-<div class="card-title"> <h3 style="text-align:center"> Create User </h3> </div> </div>
+<div class="card-title"> <h3 style="text-align:center"> Edit User </h3> </div> </div>
     <div class="card-body">
         <form class="form-horizontal" method="POST" action="{{ route('user.update', $user->id ) }}">
         {{ method_field('PUT') }}
              {{ csrf_field() }}
+             <input type="hidden" name="_method" value="PATCH">
             <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
 
                 <label for="name" class="col-sm-2 control-label">Name</label>
@@ -70,16 +71,30 @@
             <div class="form-group{{ $errors->has('role') ? ' has-error' : '' }}">
                 <label for="name" class="col-sm-2 control-label">Role</label>
                 <div class="col-md-9">
-                    <select name="role" id="role" class="form-control select2" >
-                    <option name="role" id="role" value="">---Select Role---</option>
-                    <option name="role" id="role" value="{{$data = '1'}}"> KaLab </option>
-                    <option name="role" id="role" value="{{$data = '2'}}"> Aslab </option>
+                @if (Auth::user()->role == 2 )
+                <input type="hidden" id="role" name="role" value="{{$data = '2'}}">
+                    <select name="role" id="role" class="form-control select2" disabled >
+                    <option name="role" id="role" value=""> ---Select Role---</option>
+                    <option name="role" id="role" value="{{$data = '1'}} " {{ $user->role  == $data ? 'selected' : '' }}> KaLab </option>
+                    <option name="role" id="role" value="{{$data = '2'}}"{{ $user->role  == $data ? 'selected' : '' }}> Aslab </option>
                     </select>
                     @if ($errors->has('role'))
                         <span class="help-block">
                             <strong>{{ $errors->first('role') }}</strong>
                         </span>
                     @endif
+                @else 
+                <select name="role" id="role" class="form-control select2" >
+                    <option name="role" id="role" value="" > ---Select Role---</option>
+                    <option name="role" id="role" value="{{$data = '1'}} " {{ $user->role  == $data ? 'selected' : '' }}> KaLab </option>
+                    <option name="role" id="role" value="{{$data = '2'}}"{{ $user->role  == $data ? 'selected' : '' }}> Aslab </option>
+                    </select>
+                    @if ($errors->has('role'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('role') }}</strong>
+                        </span>
+                    @endif
+                @endif
                 </div>
             </div>
 
@@ -98,7 +113,7 @@
                
                     <div class="form-group ">
                         <button type="submit" class="btn btn-primary float-right">
-                                        Create</button> </form>
+                                        Edit</button> </form>
                         <form action="{{route('user.index')}}"><button type="submit" class="btn btn-primary pull-left">Back To List User</button></form>
                     </div>
                 </div>

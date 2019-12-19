@@ -36,6 +36,15 @@
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
         @if (Auth::User())
+        <a href="{{route('user.edit', Auth::user()->id)}}" class ="dropdown-item" class="btn btn-block btn-outline-primary">
+            <!-- Message Start -->
+            <div class="media">
+              <div class="media-body">
+             Edit Profile
+              </div>
+            </div>
+            <!-- Message End -->
+          </a>
          <a href="{{ route('logout') }}" class ="dropdown-item" class="btn btn-block btn-outline-primary " onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
             <!-- Message Start -->
             <div class="media">
@@ -121,24 +130,27 @@
                   <p>Jadwal Asisten Lab</p>
                 </a>
               </li>
+              @if (Auth::User())
               <li class="nav-item">
-                <a href="./index3.html" class="nav-link">
+                <a href="{{route('inventari.index')}}" class="nav-link">
                   <i class=" fas fa-circle nav-icon"></i>
                   <p>Inventaris</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="./index3.html" class="nav-link">
+                <a href="{{route('report.index')}}" class="nav-link">
                   <i class=" fas fa-circle nav-icon"></i>
                   <p>Laporan Harian</p>
                 </a>
               </li>
+              
               <li class="nav-item">
                 <a href="{{ route('user.index') }}" class="nav-link">
                   <i class=" fas fa-circle nav-icon"></i>
                   <p>Pengguna</p>
                 </a>
               </li>
+              @endif
             </ul>
           </li>
           
@@ -183,6 +195,7 @@
 <!-- ./wrapper -->
 
 <!-- jQuery -->
+@yield('script')
 <script src="/js/app.js"></script>
 </body>
 </html>

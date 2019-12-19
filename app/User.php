@@ -39,4 +39,8 @@ class User extends Authenticatable
     public function status(){
         return $this->belongsTo(App\Status);
     }
+
+    public function inventaris(){
+        return $this->hasMany(App\Inventaris);
+    }
 }

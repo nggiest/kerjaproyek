@@ -3,6 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
+use App\Report;
+use App\ReportActivity;
+use Auth;
+use DB;
+use Validator;
 
 class ReportController extends Controller
 {
@@ -13,7 +19,26 @@ class ReportController extends Controller
      */
     public function index()
     {
-        //
+        if (Auth::User()->role == 2)
+        {
+            $report = Report::all();
+            foreach ($report as $reports) {
+                $reports->repact = ReportActivity::where('report_id',$reports->id)->get();
+                // $reports->repact = ReportActivity::all();
+                $reports->reportcount = DB::table('reportactivity')->select(DB::Raw('count(report_id) as countid'))->groupBy('report_id')->where('report_id', $reports->id)->first(); 
+            }
+        }
+        else 
+        {
+            $report = Report::select('*')->where('user', Auth::user()->id)->get();
+            foreach ($report as $reports) {
+                $reports->repact = ReportActivity::where('report_id',$reports->id)->get();
+                // $reports->repact = ReportActivity::all();
+                //$reports->reportcount = DB::table('reportactivity')->select(DB::Raw('count(report_id) as countid'))->groupBy('report_id')->where('report_id', $reports->id)->first(); 
+            }
+
+        }
+        return view('reports.index', compact ('report'));
     }
 
     /**
@@ -23,7 +48,9 @@ class ReportController extends Controller
      */
     public function create()
     {
-        //
+        $report=Report::all();
+        return view('reports.create',compact('report'));
+
     }
 
     /**
@@ -34,7 +61,37 @@ class ReportController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            DB::beginTransaction();
+    
+            try {
+                // Interacting with the database
+                $report = Report::create([
+                    'user' => Auth::user()->id,
+                    'date' => $request['date'],
+                ]);
+                $id = $report->id;
+                $data = [] ;
+                foreach($request['activities'] as $repact) {
+                    array_push($data, 
+                            [
+                                'report_note' => $repact['report_note'],
+                            ]);
+                    } 
+                    ReportActivity::insert($data);
+                DB::commit();    // Commiting  ==> There is no problem whatsoever
+            } catch (Exception $e) {
+                DB::rollback();   // rollbacking  ==> Something went wrong
+            }
+            Alert::message('Report created successfully','Success');
+          }  
+    
+          catch(\Illuminate\Database\QueryException $ex){ 
+            Alert::error('Report Duplicated', 'Error'); 
+            // Note any method of class PDOException can be called on $ex.
+          }
+                return redirect('/daily');
+           
     }
 
     /**

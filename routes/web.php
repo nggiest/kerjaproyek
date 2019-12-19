@@ -19,3 +19,9 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('/user', 'UserController');
+Route::get('/user/cp/{id}', 'UserController@changepassword')->name('user.change');
+Route::match(['put', 'patch'], '/user/cp/{id}', 'UserController@gantipwd')->name('user.ganti');
+Route::resource('/lab','JadwallabController');
+Route::resource('/aslab','JadwalAslabController');
+Route::resource('/report','ReportController');
+Route::get('/report/getReport/{id}', 'ReportController@getData');

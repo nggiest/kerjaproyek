@@ -78,7 +78,7 @@
                     <select name="status_id" id="status_id" class="form-control select2" >
                         <option name="status_id" id="status_id" value="">---Select Status---</option>
                         <option name="status_id" id="status_id" value="{{$data = 1 }}"> Active User </option>
-                        <option name="status_id" id="status_id" value="{{$data = 0 }}"> Non Active User </option>
+                        <option name="status_id" id="status_id" value="{{$data = 2 }}"> Non Active User </option>
                     </select>
                     @if ($errors->has('status_id'))
                         <span class="help-block">
@@ -93,8 +93,8 @@
                 <div class="col-md-9">
                     <select name="role" id="role" class="form-control select2" >
                     <option name="role" id="role" value="">---Select Role---</option>
-                    <option name="role" id="role" value="{{$data = '1'}}"> KaLab </option>
-                    <option name="role" id="role" value="{{$data = '2'}}"> Aslab </option>
+                    <option name="role" id="role" value="{{$data = '1'}}"> Dosen </option>-
+                    <option name="role" id="role" value="{{$data = '2'}}"> Asisten Lab </option>
                     </select>
                     @if ($errors->has('role'))
                         <span class="help-block">

@@ -75,7 +75,7 @@ class UserController extends Controller
         //$uploadphoto->storeAs($destinationPath,$photo);
 
         //Alert::message('User save successfully','Success');
-        return redirect()->route('user.show');
+        return redirect()->route('user.index');
     }
 
     /**
@@ -88,7 +88,7 @@ class UserController extends Controller
     {
         $user = Users::findOrFail($id);
         $user = $request->session()->get('login');
-        return view('user.show', compact('user'));
+        return view('user.show', compact('users'));
 
     }
 
@@ -120,23 +120,32 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request, [
+        $request->validate([
             'name' => 'required|string|min:8|max:128',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
-            'nim' => 'required|string',
-            'status_id' => 'requied',
+            'email' => 'required|string|email|max:255',
+            'nim' => 'required',
+            'status_id' => 'required',
             'role' => 'required',
-            'photo' => 'required|image|mimes:jpg,jpeg,png'
+            //'photo' => 'required|image|mimes:jpg,jpeg,png'
         ]);
-        
+
+        // $uploadphoto = $request->file('photo');
+        // $destinationPath = ('public/files');
+        // $extension = $uploadphoto->getClientOriginalExtension();
+        // $photo = Uuid::generate(4).'.'.$extension;
         $user = User::findOrFail($id);
         $user->password = Hash::make('password');
-        $user->name = $request->name;
-        $user->nim = $request->nim;
-        $user->status_id = $request->status_id;
-        $user->role = $request->role;
-        $user->update();
+        $user->update([
+            'name' => $request['name'],
+            'email'=> $request['email'],
+            'password' => bcrypt($request['password']),
+            'nim' => $request['nim'],
+            'status_id'=> $request['status_id'],
+            'role'=> $request['role'],
+            //'photo' => $photo,
+        ]);
+
+        return redirect()->route('user.index');
     }
 
     /**
@@ -158,7 +167,7 @@ class UserController extends Controller
     public function changepassword($id)
     {
         $user = User::findOrFail($id);
-        return view('users.changepassword', compact('user'));
+        return view('users.change', compact('user'));
 
     }
 

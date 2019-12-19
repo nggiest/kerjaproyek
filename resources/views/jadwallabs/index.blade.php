@@ -2,7 +2,7 @@
 @section('content')
 <div class="card">
     <div class="card-header">
-        <h3 class="card-title">Data Pengguna</h3>
+        <h3 class="card-title">Jadwal Penggunaan Lab</h3>
     </div>
     <div class="card-body">
         <div id="example2_wrapper" class="dataTables_wrapper dt-bootstrap4">
@@ -15,41 +15,19 @@
                     <thead>
                         <tr role="row">
                         <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">No</th>
-                        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">Nama</th>
-                        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending">Jabatan</th>
-                        @if(Auth::user()->role == 1 )
-                        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending">Status Keanggotaan</th>
+                        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">Hari</th>
+                        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending">Jam Pelajaran</th>
+                        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending">Mata Kuliah</th>
+                        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending">Kelas</th>
+                        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending">Dosen</th>
                         <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">Action</th>
-                        @endif
                         </tr>
                     </thead>
                     <tbody>
-                    @php (
-                        $no = 1
-                        )
-                    @foreach($user as $users)
-                   
-                      <tr role="row" class="odd">
-                        <td>{{$no++}}</td>
-                        <td>{{$users->name}}</td>
-                        <td>{{$users->role == 1 ? 'Dosen' : 'Asisten Lab'}}</td>
-                        @if(Auth::user()->role == 1 )
-                        <td>{{$users->statuses}}</td>
-                        <td style="text-align:center"> <form action="{{route('user.edit', $users->id)}}">  
-                        <button class="btn btn-success" type="submit" value="Edit"> Edit </button> </form> </td>
-                        @endif
-                    @endforeach
+                 
                       </tr>
                     </tbody>
-                    <!-- <tfoot>
-                        <tr><th rowspan="1" colspan="1">No</th>
-                        <th rowspan="1" colspan="1">Nama</th>
-                        <th rowspan="1" colspan="1">Jabatan</th>
-                        @if(Auth::user()->role == 1 )
-                        <th rowspan="1" colspan="1">Status</th>
-                        <th rowspan="1" colspan="1">Action</th></tr>
-                        @endif
-                    </tfoot> -->
+                    
                 </table>
             </div>
         </div>
