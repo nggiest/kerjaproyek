@@ -21,8 +21,11 @@
         <thead>
           <tr>
             <th style="text-align:center" >No</th>
-            <th style="text-align:center" class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column descending" style="width: 217.8px;" aria-sort="ascending">Date</th>
+            <th style="text-align:center" >Tanggal </th>
             <th style="text-align:center" >Laporan Harian</th>
+            @if(Auth::user()->role == 1 )
+            <th style="text-align:center" >Petugas Pelapor</th>
+            @endif
             <th colspan="3" style="text-align:center">Action</th>
                       
           </tr>
@@ -32,100 +35,20 @@
             $no = 1
                       
           )
-
-          @foreach ($report as $reports)
+          @foreach ($reportdaily as $daily)
+          
             <tr>
                 <td style="text-align:center">{{$no++}}</td>
-                <td style="text-align:center">{{$reports->date}}</td>
-                <td style="text-align:center" >{{$reports->reported}}</td>
-                <td> 
-
-                  <button class="btn btn-success view-report" type="button" data-toggle="modal" data-target="#modal-report" onClick="view_report({{$reports->id}})">
-                  <i class="fa fa-fw fa-eye"> </i> Edit
-                  </button> 
-                </td> 
-                <td>
-                    <button type="button" class="btn btn-success remove-record" data-toggle="modal" data-target="#modal-delete" data-id="{{$reports->id}}" data-url="{{route('daily.destroy', $reports->id )}}">
-                      <i class="fa fa-trash"> Delete </i>
-                    </button>
-                </td> 
-                <td>
-                            
-                      <form action="{{route('daily.edit', $reports->id)}}">
-                        <button type="submit" class="btn btn-success" value="Edit">
-                        <i class="fa fa-pencil"> Edit </i>
-                      </button>
-                                </form>
-                </td>
+                <td style="text-align:center">{{$daily->tanggal}}</td>
+                <td style="text-align:center">{{$daily->report_note}}</td>
+                @if(Auth::user()->role == 1 )
+                <td style="text-align:center">{{$daily->nama}}</td>
+                @endif
             </tr>
             @endforeach
         </tbody>
       </table>
   </div>
-              
-                  <!-- <div class="modal fade" id="modal-report">
-                      <div class="modal-dialog">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                              <span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title tanggal"> Report </h4>
-                          </div>
-                          <div class="modal-body">
-                              <table id="activity" class="table ">
-                                  <thead>
-                                  <tr>
-                                    <th>No</th>
-                                    <th>Activity</th>
-                                    @if(Auth::User()->role == 1)
-                                    <th>Pengguna</th>
-                                    @endif
-                                  </tr>
-                                  </thead>
-                                  <tbody id="activityx">
-                                @php (
-                                  $no = 1
-                                  
-                                )
-
-                              </table>
-                          </div>
-                          <div class="modal-footer">
-                            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-                            
-                          </div>
-                        </div>
-                        <!-- /.modal-content -->
-                      </div>
-                      <!-- /.modal-dialog -->
-                  </div> -->
-                  <form action="{{route('home')}}"><button type="submit" class="btn btn-primary">Back Home</button></form>
-                  <form action="" method="POST" class="remove-record-model">
-                    {{csrf_field()}}
-                    <div class="modal fade" id="modal-delete">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                  <div class="modal-header">
-                                    <h4 class="modal-title">SPM File Management</h4>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                      <span aria-hidden="true">&times;</span></button>
-                                  </div>
-                                  <div class="modal-body">
-                                    <h3 style="text-align:center">Are you sure ?</h3>
-                                  </div>
-                                  <div class="modal-footer">
-                                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-                                    
-                                    
-                                      <button class="btn btn-success" type="submit" value="Delete"> Delete
-                                    </button>
-                                    
-                                  </div>
-                                </div>
-                            </div>    <!-- /.modal-content -->
-                    </div>
-                  </form>
-                
   </div>
 </div>
 @include('sweet::alert')

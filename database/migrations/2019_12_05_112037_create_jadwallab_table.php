@@ -18,9 +18,12 @@ class CreateJadwallabTable extends Migration
             $table->integer('hari_id')->unsigned();
             $table->foreign('hari_id')->references('id')->on('hari');
             $table->integer('jampel');
-            $table->string('makul');
-            $table->string('kelas');
-            $table->string('dosen');
+            $table->integer('makul_id')->unsigned();
+            $table->foreign('makul_id')->references('id')->on('makul');
+            $table->integer('kelas_id')->unsigned();
+            $table->foreign('kelas_id')->references('id')->on('kelas');
+            $table->integer('dosen_id')->unsigned();
+            $table->foreign('dosen_id')->references('id')->on('dosen');
             $table->timestamps();
         });
     }

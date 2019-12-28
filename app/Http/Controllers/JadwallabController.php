@@ -28,7 +28,18 @@ class JadwallabController extends Controller
      */
     public function create()
     {
-        //
+        $jadwallab = Jadwallab::all();
+        $this->validate($request, [
+            'jenis_barang' => 'required|string|min:2|max:128',
+            'jumlah' => 'required',
+        ]);
+
+       $inventaris =  Inventaris::create([
+            'jenis_barang' => $request['jenis_barang'],
+            'jumlah' => $request['jumlah'],
+            'update_by' => $request['update_by'],
+            ]);
+            
     }
 
     /**

@@ -8,23 +8,22 @@
                 <div class="card-body">
                     <div class="form-horizontal" >
                         {{ csrf_field() }}
-                        <input type="hidden" name="user" id="user" value="{{Auth::user()->id}}">
+                        <input type="hidden" name="users_id" id="users_id" value="{{Auth::user()->id}}">
                         <label class="col-md-2"> Date </label>
                         <div class="col-md-9">
-                                <input id="date" type="date" class="form-control" name="date" value ="{{ date('Y-m-d', strtotime('now')) }}" required autofocus>
+                                <input id="tanggal" type="date" class="form-control" name="tanggal" value ="{{ date('Y-m-d', strtotime('now')) }}" required autofocus>
                                 <!-- <input id="date" type="date" class="form-control" name="date" value ="{{ Carbon\Carbon::now()}}" required autofocus> -->
                         </div> 
                       
                     </div>
                 </div>
             </div>
-            <button type ="button" class="btn btn-success" id="button1"> <i class="fa fa-plus-circle"> </i> Aktifitas </button> <br> <br>
-            <div id="card-activities" class="cloningan" id="myactivities">
-             <button class="btn btn-card-tool float-right delbutton" type="button"><i class="fas fa-trash"></i></button> 
-              <div class="card card-primary">
-                  <div class="card-title"><h3 style="text-align:center"> Laporan
-                   </h3>
-                </div>
+            <button type ="button" class="btn btn-success" id="button1"> <i class="fa fa-plus-circle"> </i> Aktivitas </button> <br> <br>
+            <div id="card-activities" class="">
+            <div class="card card-primary cloningan" id="myactivities">
+                  <h3 style="text-align:center"> Laporan
+                  <button class="btn btn-card-tool float-right delbutton" type="button"><i class="fas fa-trash"></i></button> 
+                  </h3>
                   <div class="card-body" id="activitycard">
                     <div class="form-horizontal">
                       <div class="form-group">
@@ -37,6 +36,7 @@
                   </div>   
               </div>
               </div>
+            </div>
             </div>
             <div class="card-footer">
               <button type="submit" class="btn btn-primary float-right">Tambah</button>  </form> 
@@ -65,7 +65,7 @@ var count = 1;
     });
 
   $(document).on("click", ".delbutton", function() {
-      // console.log($(".cloningan").length);
+      console.log($(".cloningan").length);
       if ($(".cloningan").length > 1) {
         $(this).parent().parent().remove();
       } else {

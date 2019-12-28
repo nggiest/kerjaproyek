@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Report;
-use App\ReportActivity;
+use App\ReportDaily;
+use Alert;
 use Auth;
 use DB;
 use Validator;
+use Illuminate\Support\Facades\Input;
 
 class ReportController extends Controller
 {
@@ -19,29 +21,29 @@ class ReportController extends Controller
      */
     public function index()
     {
+        //$reportdaily = ReportDaily::all();
+        $report=Report::all();
+        $reportdaily = ReportDaily::all();
+        $user = User::all();
         if (Auth::User()->role == 1)
         {
-            $report = Report::all();
-            foreach ($report as $reports) {
-            $reports->repact = DB::table('report')
-                ->join('reportdaily', 'report.id','=', 'reportdaily.report_id')
-                ->select('report.*','reportdaily.report_note as reported')
-                ->orderBy('date')
-                ->get();
-            }
+            $reportdaily = DB::table('reportdaily')
+            ->join('report', 'reportdaily.report_id','=', 'report.id')
+            ->join('users','report.users_id','=','users.id')
+            ->select('reportdaily.*','report.tanggal as tanggal','users.name as nama')
+            ->orderBy('report.tanggal')
+            ->get();
         }
         else 
         {
-            $report = Report::select('*')->where('user', Auth::user()->id)->get();
-            foreach ($report as $reports) {
-                $reports->repact=DB::table('report')
-                ->join('reportdaily', 'report.id','=', 'reportdaily.report_id')
-                ->select('report.*','reportdaily.report_note as reported')
-                ->get();
-            }
+            $reportdaily = DB::table('reportdaily')
+            ->join('report', 'reportdaily.report_id','=', 'report.id')
+            ->select('reportdaily.*','report.tanggal as tanggal')
+            ->orderBy('report.tanggal')
+            ->get();
 
         }
-        return view('reports.index', compact ('report'));
+        return view('reports.index', compact ('reportdaily','report'));
     }
 
     /**
@@ -66,34 +68,34 @@ class ReportController extends Controller
     {
         try {
             DB::beginTransaction();
-    
             try {
+                //return $request;
                 // Interacting with the database
                 $report = Report::create([
-                    'user' => Auth::user()->id,
-                    'date' => $request['date'],
+                    'users_id' => Auth::user()->id,
+                    'tanggal' => $request['tanggal'],
                 ]);
                 $id = $report->id;
                 $data = [] ;
                 foreach($request['activities'] as $repact) {
                     array_push($data, 
                             [
+                                'report_id'=>$report->id,
                                 'report_note' => $repact['report_note'],
                             ]);
                     } 
-                    ReportActivity::insert($data);
+                    ReportDaily::insert($data);
                 DB::commit();    // Commiting  ==> There is no problem whatsoever
             } catch (Exception $e) {
                 DB::rollback();   // rollbacking  ==> Something went wrong
             }
-            Alert::message('Report created successfully','Success');
+            // Alert::message('Report created successfully','Success');
           }  
     
           catch(\Illuminate\Database\QueryException $ex){ 
             Alert::error('Report Duplicated', 'Error'); 
             // Note any method of class PDOException can be called on $ex.
           }
-                return redirect('/report');
            
     }
 
