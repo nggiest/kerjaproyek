@@ -3,22 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\User;
 use App\Report;
 use App\ReportDaily;
-use Alert;
-use Auth;
-use DB;
+use App\User;
 use Validator;
+use DB;
+use Auth;
 use Illuminate\Support\Facades\Input;
 
-class ReportController extends Controller
+
+class ReportDailyController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         //$reportdaily = ReportDaily::all();
@@ -39,6 +34,7 @@ class ReportController extends Controller
             $reportdaily = DB::table('reportdaily')
             ->join('report', 'reportdaily.report_id','=', 'report.id')
             ->select('reportdaily.*','report.tanggal as tanggal')
+            ->where('report.users_id','=',Auth::User()->id)
             ->orderBy('report.tanggal')
             ->get();
 
@@ -54,7 +50,8 @@ class ReportController extends Controller
     public function create()
     {
         $report=Report::all();
-        return view('reports.create',compact('report'));
+        $reportdaily=ReportDaily::all();
+        return view('reports.create',compact('report','reportdaily'));
 
     }
 
@@ -96,7 +93,7 @@ class ReportController extends Controller
             Alert::error('Report Duplicated', 'Error'); 
             // Note any method of class PDOException can be called on $ex.
           }
-           
+           return redirect()->route('daily.index');
     }
 
     /**

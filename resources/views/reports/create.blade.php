@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <form id="giomales" method="POST" action="{{ route('report.store')}}">
+    <form id="giomales" method="POST" action="{{ route('daily.store')}}">
             <div class="card card-primary">
                 <div class="card-header"><h3 style="text-align:center">Buat Laporan Harian </h3></div>
                 <div class="card-body">

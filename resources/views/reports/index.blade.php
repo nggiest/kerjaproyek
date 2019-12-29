@@ -7,7 +7,7 @@
   </div>
   </div>
   <div class="card-body">
-  <div class="col-sm-12"><form action="{{route('report.create')}}">
+  <div class="col-sm-12"><form action="{{route('daily.create')}}">
         <button type="submit" class="btn btn-success btn-sm float-right"> <i class="fas fa-plus-circle"> </i>  Tambah Laporan Baru </button> 
         </form></div>
   </div>
@@ -15,7 +15,7 @@
   @php (
     $no = 1
   )
-  <form method="
+  <div  class="col-sm-12">
   <div class="table-responsive" >
       <table id="" class="table table-bordered table-hover">
         <thead>
@@ -44,10 +44,13 @@
                 @if(Auth::user()->role == 1 )
                 <td style="text-align:center">{{$daily->nama}}</td>
                 @endif
+                <td style="text-align:center"> <form action="{{route('daily.edit', $daily->id)}}">  
+                 <button class="btn btn-success" type="submit" value="Edit"> <i class="far fa-edit"> </i> Edit </button> </form> </td> 
             </tr>
             @endforeach
         </tbody>
       </table>
+  </div>
   </div>
   </div>
 </div>

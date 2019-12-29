@@ -25,4 +25,4 @@ Route::resource('/lab','JadwallabController');
 Route::resource('/inventaris','InventarisController');
 Route::resource('/aslab','JadwalAslabController');
 Route::resource('/report','ReportController');
-Route::get('/report/getReport/{id}', 'ReportController@getData');
+Route::resource('/daily','ReportDailyController');
