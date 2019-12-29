@@ -116,8 +116,11 @@ class ReportDailyController extends Controller
     public function edit($id)
     {
         $reportdaily = ReportDaily::findOrFail($id);
-        $report = Report::all();
-        return view('reports.edit', compact('reportdaily','report'));
+        $tanggal = DB::table('report')
+                 ->join('reportdaily','report.id','=','reportdaily.report_id')
+                 ->select('report.tanggal as tanggal')
+                 ->get();
+        return view('reports.edit', compact('reportdaily','tanggal'));
     }
 
     /**
@@ -129,7 +132,12 @@ class ReportDailyController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $reportdaily = ReportDaily::findOrFail($id);
+        $reportdaily->update([
+            'report_note' => $request['report_note'],
+        ]);
+        
+       //return redirect()->route('daily.index');
     }
 
     /**

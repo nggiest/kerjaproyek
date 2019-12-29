@@ -40,7 +40,7 @@
             <tr>
                 <td style="text-align:center">{{$no++}}</td>
                 <td style="text-align:center">{{$daily->tanggal}}</td>
-                <td style="text-align:center">{{$daily->report_note}}</td>
+                <td style="text-align:left">{{$daily->report_note}}</td>
                 @if(Auth::user()->role == 1 )
                 <td style="text-align:center">{{$daily->nama}}</td>
                 @endif

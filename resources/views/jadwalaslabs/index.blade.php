@@ -2,50 +2,29 @@
 @section('content')
 <div class="card">
     <div class="card-header">
-        <h3 class="card-title">Data Inventaris</h3>
+        <h3 class="card-title">Jadwal Asisten Lab</h3>
     </div>
     <div class="card-body">
         <div id="example2_wrapper" class="dataTables_wrapper dt-bootstrap4">
             <div class="row"><div class="col-sm-12 col-md-6"></div>
             <div class="col-sm-12 col-md-6"></div>
         </div>
-        
         <div class="row">
             <div class="col-sm-12">
-            <div class="col-sm-12"><form action="{{route('inventaris.create')}}">
-            <button type="submit" class="btn btn-success btn-sm float-right"> <i class="fas fa-plus-circle"> </i>  Tambah Laporan Baru </button> 
-            </form></div>
-             </div>
                 <table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
                     <thead>
                         <tr role="row">
                         <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">No</th>
-                        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending">Jenis Barang</th>
-                        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending">Jumlah</th>
+                        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">Hari</th>
+                        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending">User</th>
                         <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                    @php (
-                        $no = 1
-                        )
-                    @foreach($inventaris as $inventaries)
-                   
-                      <tr role="row" class="odd">
-                        <td>{{$no++}}</td>
-                        <td>{{$inventaries->jenis_barang}}</td>
-                        <td>{{$inventaries->jumlah}}</td>
-                        <td style="text-align:center"> <form action="{{route('inventaris.edit', $inventaries->id)}}">  
-                        <button class="btn btn-success" type="submit" value="Edit"> Edit </button> </form> </td>
-                    @endforeach
+                 
                       </tr>
                     </tbody>
-                    <tfoot>
-                        <tr><th rowspan="1" colspan="1">No</th>
-                        <th rowspan="1" colspan="1">Jenis Barang</th>
-                        <th rowspan="1" colspan="1">Jumlah</th>
-                        <th rowspan="1" colspan="1">Action</th></tr>
-                    </tfoot>
+                    
                 </table>
             </div>
         </div>

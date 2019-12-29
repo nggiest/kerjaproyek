@@ -3,6 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
+use App\Hari;
+use App\JadwalAslab;
+use DB;
+use Auth;
+use Validator;
 
 class JadwalAslabController extends Controller
 {
@@ -23,7 +29,9 @@ class JadwalAslabController extends Controller
      */
     public function create()
     {
-        //
+        $hari=Hari::all();
+        $users=User::all();
+        return view('jadwalaslabs.create', compact('hari','users'));
     }
 
     /**
