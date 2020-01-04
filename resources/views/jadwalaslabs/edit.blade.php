@@ -4,7 +4,7 @@
 <div class="card-header">
 <div class="card-title"> <h3 style="text-align:center"> Edit Data Asisten Lab </h3> </div> </div>
     <div class="card-body">
-        <form class="form-horizontal" method="POST" action="{{ route('jadwalaslab.update', $jadwalaslab->id ) }}">
+        <form class="form-horizontal" method="POST" action="{{ route('aslab.update', $aslab->id ) }}">
         {{ method_field('PUT') }}
              {{ csrf_field() }}
 

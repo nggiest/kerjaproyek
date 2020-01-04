@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Hari;
 use App\JadwalAslab;
+use App\AslabJab;
 use DB;
 use Auth;
 use Validator;
@@ -19,7 +20,26 @@ class JadwalAslabController extends Controller
      */
     public function index()
     {
-        //
+        $jadwalaslab = JadwalAslab::all();
+        $jadwalaslab1= DB::table('jadwalaslab')
+        ->join('aslabjab','jadwalaslab.aslabjab','=','aslabjab.id')
+        ->join('users','jadwalaslab.users_id','=','users.id')
+        ->select('jadwalaslab.*','users.name as nama')
+        ->where('jadwalaslab.aslabjab','1')
+        ->orderBy('aslabjab.id')
+        ->get();
+        $jadwalaslab2= DB::table('jadwalaslab')
+        ->join('aslabjab','jadwalaslab.aslabjab','=','aslabjab.id')
+        ->join('users','jadwalaslab.users_id','=','users.id')
+        ->select('jadwalaslab.*','users.name as nama')
+        ->where('jadwalaslab.aslabjab','2')
+        ->orderBy('aslabjab.id')
+        ->get();
+        $hari = Hari::all();
+       
+        $aslabjab = AslabJab::all();
+       
+        return view('jadwalaslabs.index',compact('jadwalaslab1','hari','aslabjab','jadwalaslab2'));
     }
 
     /**

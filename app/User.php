@@ -47,4 +47,8 @@ class User extends Authenticatable
     public function report(){
         return $this->hasMany(App\Report);
     }
+
+    public function aslab(){
+        return $this->hasMany(App\JadwalAslab);
+    }
 }

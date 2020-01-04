@@ -13,4 +13,7 @@ class JadwalAslab extends Model
     public function hari(){
         return $this->belongTo(App\Hari);
     }
+    public function User(){
+        return $this->belongTo(App\User);
+    }
 }
