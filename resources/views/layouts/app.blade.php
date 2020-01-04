@@ -67,15 +67,7 @@
             </div>
             <!-- Message End -->
           </a>
-          <a href="{{ route('user.create') }}" class ="dropdown-item" class="btn btn-block btn-outline-primary">
-            <!-- Message Start -->
-            <div class="media">
-              <div class="media-body">
-              Register
-              </div>
-            </div>
-            <!-- Message End -->
-          </a>
+          
           @endif
         </div>
       </li>
