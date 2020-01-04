@@ -42,7 +42,14 @@ class JadwalAslabController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //return $request;
+        foreach($request->users_id as $aslab) {
+            
+            $dxx = JadwalAslab::create([
+                'hari_id' => $request->hari_id,
+                'project_id' => $request->users_id,
+                ]);
+        }
     }
 
     /**

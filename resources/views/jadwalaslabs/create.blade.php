@@ -29,7 +29,7 @@
                 <div class="col-md-9">
                 @foreach($users as $user)
                             <label>
-                            <input type="checkbox" name="user_id[]" id="user_id[]" value="{{$data = $user->id}}"> {{$user->name}}
+                            <input class="someclass" type="checkbox" name="users_id[]" id="users_id[]" value="{{$data = $user->id}}"> {{$user->name}}
                             </label> 
                             </br>
                 @endforeach 
@@ -59,13 +59,11 @@
 
 @section('script')
 <script>
-    $(".someclass").change(function() {
-        var count = $(".someclass:checked").length; //get count of checked checkboxes
-
-        if (count > ) {
-            alert("Maksimal 2 Asisten Lab untuk 1 hari");
-            $(this).prop('checked', false); // turn this one off
-        }
-    });
+   $('input[type=checkbox]').on('change', function (e) {
+    if ($('input[type=checkbox]:checked').length > 2) {
+        $(this).prop('checked', false);
+        alert("allowed only 2");
+    }
+});
 </script>
 @endsection
