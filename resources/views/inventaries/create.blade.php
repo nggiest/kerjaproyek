@@ -37,6 +37,21 @@
                 </div>
             </div>
 
+            <div class="form-group{{ $errors->has('detail') ? ' has-error' : '' }}">
+
+                <label for="detail" class="col-sm-2 control-label">Detail</label>
+
+                <div class="col-md-9">
+                    <input id="detail" type="string" class="form-control" name="detail" required autofocus>
+
+                    @if ($errors->has('detail'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('detail') }}</strong>
+                        </span>
+                    @endif
+                </div>
+            </div>
+
             <!-- <div class="form-group">
                     <label for="photo" class="col-sm-2 control-label">Foto Diri</label>
                     <div class="input-group">

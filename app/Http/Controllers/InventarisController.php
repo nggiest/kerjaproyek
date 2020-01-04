@@ -42,12 +42,14 @@ class InventarisController extends Controller
         $this->validate($request, [
             'jenis_barang' => 'required|string|min:2|max:128',
             'jumlah' => 'required',
+            'detail' => 'required',
         ]);
 
        $inventaris =  Inventaris::create([
             'jenis_barang' => $request['jenis_barang'],
             'jumlah' => $request['jumlah'],
             'update_by' => $request['update_by'],
+            'detail' => $request['detail'],
             ]);
             
         // return $request;
@@ -63,7 +65,8 @@ class InventarisController extends Controller
      */
     public function show($id)
     {
-        //
+        $inventaris=Inventaris::findOrFail($id);
+        return view('inventaries.detail', compact('inventaris'));
     }
 
     /**

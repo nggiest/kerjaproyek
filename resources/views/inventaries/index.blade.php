@@ -19,10 +19,10 @@
                 <table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
                     <thead>
                         <tr role="row">
-                        <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">No</th>
-                        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending">Jenis Barang</th>
-                        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending">Jumlah</th>
-                        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">Action</th>
+                        <th style="text-align:center" class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">No</th>
+                        <th style="text-align:center" class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending">Jenis Barang</th>
+                        <th style="text-align:center" class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending">Jumlah</th>
+                        <th style="text-align:center" class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="2" aria-label="CSS grade: activate to sort column ascending">Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -36,16 +36,14 @@
                         <td>{{$inventaries->jenis_barang}}</td>
                         <td>{{$inventaries->jumlah}}</td>
                         <td style="text-align:center"> <form action="{{route('inventaris.edit', $inventaries->id)}}">  
-                        <button class="btn btn-success" type="submit" value="Edit"> Edit </button> </form> </td>
+                        <button class="btn btn-success" type="submit" value="Edit"> Edit </button> </form></td>
+                        <td style="text-align:center"><form action="{{route('inventaris.show', $inventaries->id)}}">  
+                        <button class="btn btn-success" type="submit" value="Detail"> Detail </button> </form>
+                         </td>
                     @endforeach
                       </tr>
                     </tbody>
-                    <tfoot>
-                        <tr><th rowspan="1" colspan="1">No</th>
-                        <th rowspan="1" colspan="1">Jenis Barang</th>
-                        <th rowspan="1" colspan="1">Jumlah</th>
-                        <th rowspan="1" colspan="1">Action</th></tr>
-                    </tfoot>
+                    
                 </table>
             </div>
         </div>
