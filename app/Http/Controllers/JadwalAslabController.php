@@ -24,16 +24,18 @@ class JadwalAslabController extends Controller
         $jadwalaslab1= DB::table('jadwalaslab')
         ->join('aslabjab','jadwalaslab.aslabjab','=','aslabjab.id')
         ->join('users','jadwalaslab.users_id','=','users.id')
+        ->join('hari','jadwalaslab.hari_id','=','hari.id')
         ->select('jadwalaslab.*','users.name as nama')
         ->where('jadwalaslab.aslabjab','1')
-        ->orderBy('aslabjab.id')
+        ->orderBy('hari.id')
         ->get();
         $jadwalaslab2= DB::table('jadwalaslab')
         ->join('aslabjab','jadwalaslab.aslabjab','=','aslabjab.id')
         ->join('users','jadwalaslab.users_id','=','users.id')
+        ->join('hari','jadwalaslab.hari_id','=','hari.id')
         ->select('jadwalaslab.*','users.name as nama')
         ->where('jadwalaslab.aslabjab','2')
-        ->orderBy('aslabjab.id')
+        ->orderBy('hari.id')
         ->get();
         $hari = Hari::all();
        
@@ -91,7 +93,13 @@ class JadwalAslabController extends Controller
      */
     public function edit($id)
     {
-        //
+        $jadwalaslab=JadwalAslab::find($id);
+        $user=User::All();
+        $hari=Hari::All();
+        $aslabjab=Aslabjab::All();
+    
+     
+        return view('jadwalaslabs.edit', compact('jadwalaslab','user','hari','aslabjab'));
     }
 
     /**

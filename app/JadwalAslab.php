@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class JadwalAslab extends Model
 {
-    public $table = 'reportdaily';
+    public $table = 'jadwalaslab';
     protected $fillable =[
         'hari_id', 'users_id',
     ];
