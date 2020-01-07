@@ -10,6 +10,7 @@ use App\AslabJab;
 use DB;
 use Auth;
 use Validator;
+use Alert;
 
 class JadwalAslabController extends Controller
 {
@@ -24,16 +25,18 @@ class JadwalAslabController extends Controller
         $jadwalaslab1= DB::table('jadwalaslab')
         ->join('aslabjab','jadwalaslab.aslabjab','=','aslabjab.id')
         ->join('users','jadwalaslab.users_id','=','users.id')
+        ->join('hari','jadwalaslab.hari_id','=','hari.id')
         ->select('jadwalaslab.*','users.name as nama')
         ->where('jadwalaslab.aslabjab','1')
-        ->orderBy('aslabjab.id')
+        ->orderBy('hari.id')
         ->get();
         $jadwalaslab2= DB::table('jadwalaslab')
         ->join('aslabjab','jadwalaslab.aslabjab','=','aslabjab.id')
         ->join('users','jadwalaslab.users_id','=','users.id')
+        ->join('hari','jadwalaslab.hari_id','=','hari.id')
         ->select('jadwalaslab.*','users.name as nama')
         ->where('jadwalaslab.aslabjab','2')
-        ->orderBy('aslabjab.id')
+        ->orderBy('hari.id')
         ->get();
         $hari = Hari::all();
        
@@ -50,8 +53,12 @@ class JadwalAslabController extends Controller
     public function create()
     {
         $hari=Hari::all();
-        $users=User::all();
-        return view('jadwalaslabs.create', compact('hari','users'));
+        $user=User::where('role','=', 2 )->get();
+        $hari=Hari::all();
+        $aslabjab=AslabJab::all();
+        return view('jadwalaslabs.create', compact('hari','user','aslabjab'));
+
+        
     }
 
     /**
@@ -62,14 +69,14 @@ class JadwalAslabController extends Controller
      */
     public function store(Request $request)
     {
-        //return $request;
-        foreach($request->users_id as $aslab) {
-            
-            $dxx = JadwalAslab::create([
-                'hari_id' => $request->hari_id,
-                'project_id' => $request->users_id,
-                ]);
-        }
+        $jadwalaslab=JadwalAslab::all($id);
+        // return $request;
+        $jadwalaslab->create([
+            'users_id' => $request['users_id'],
+            'aslabjab' => $request['aslabjab'],
+            'hari_id' => $request['hari_id'],
+        ]);
+
     }
 
     /**
@@ -91,7 +98,11 @@ class JadwalAslabController extends Controller
      */
     public function edit($id)
     {
-        //
+        $jadwalaslab=JadwalAslab::findOrFail($id);
+        $user=User::where('role','=', 2 )->get();
+        $hari=Hari::all();
+        $aslabjab=AslabJab::all();
+        return view('jadwalaslabs.edit',compact('jadwalaslab', 'user', 'hari','aslabjab'));
     }
 
     /**
@@ -103,7 +114,14 @@ class JadwalAslabController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $jadwalaslab=JadwalAslab::findOrFail($id);
+        // return $request;
+        $jadwalaslab->update([
+            'users_id' => $request['users_id'],
+            'aslabjab' => $request['aslabjab'],
+        ]);
+
+        return redirect()->route('aslab.index');
     }
 
     /**
