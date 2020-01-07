@@ -106,7 +106,7 @@ class JadwallabController extends Controller
             'jumlah' => 'required',
         ]);
 
-       $inventaris =  Inventaris::create([
+       $jadwallab =  Jadwallab::create([
             'jenis_barang' => $request['jenis_barang'],
             'jumlah' => $request['jumlah'],
             'update_by' => $request['update_by'],
