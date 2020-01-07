@@ -7,4 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Makul extends Model
 {
     public $table = 'makul';
+    public function jadwallab(){
+        return $this->hasMany(App\Jadwallab);
+    }
 }
