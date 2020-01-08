@@ -30,9 +30,9 @@
                     <td style="text-align:center">Jam 1</td>
                     @foreach($lab1 as $jab1 )
                     @if(Auth::User())
-                      <td style="text-align:center">   <a href="{{route('lab.edit',$jab1->id)}}"> {{$jab1->nama}}
+                      <td style="text-align:center"><a href="{{route('lab.edit',$jab1->id)}}"> {{$jab1->nama}}
                       @else
-                      <td style="text-align:center"> <a href="{{route('lab.show',$jab1->id)}}"> {{$jab1->nama}}
+                      <td style="text-align:center"><a href="{{route('lab.show',$jab1->id)}}">
                       {{$jab1->nama}}
                       @endif
                       </td>

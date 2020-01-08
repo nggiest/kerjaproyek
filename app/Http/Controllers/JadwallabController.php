@@ -140,14 +140,15 @@ class JadwallabController extends Controller
         $makul = Makul::All();
         $dosen = Dosen::all();
         $hari = Hari::All();
-        $jadwallab=DB::table('jadwallab')
-                    ->join('makul','jadwallab.makul_id','=','makul.id')
-                    ->join('hari','jadwallab.hari_id','=','hari.id')
-                    ->join('kelas','jadwallab.kelas_id','=','kelas.id')
-                    ->join('dosen','jadwallab.dosen_id','=','dosen.id')
-                    ->select('jadwallab.*','hari.id as hari','makul.id as makul','kelas.id as kelas','dosen.id as dosen')
-                    ->get();
-        return view('jadwallabs.detail', compact('jadwallab','dosen','makul'));
+        $kelas = Kelas::All();
+        // $jadwallab=DB::table('jadwallab')
+        //             ->join('makul','jadwallab.makul_id','=','makul.id')
+        //             ->join('hari','jadwallab.hari_id','=','hari.id')
+        //             ->join('kelas','jadwallab.kelas_id','=','kelas.id')
+        //             ->join('dosen','jadwallab.dosen_id','=','dosen.id')
+        //             ->select('jadwallab.*','hari.id as hari','makul.id as makul','kelas.id as kelas','dosen.id as dosen')
+        //             ->get();
+        return view('jadwallabs.detail', compact('jadwallab','dosen','makul','kelas','hari'));
     }
 
     /**

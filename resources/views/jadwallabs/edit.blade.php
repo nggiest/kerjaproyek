@@ -10,10 +10,10 @@
 
              <div class="form-group{{ $errors->has('jampel') ? ' has-error' : '' }}">
 
-                <label for="makul_id" class="col-sm-2 control-label">ID Pelajaran</label>
+                <label for="makul_id" class="col-sm-2 control-label">ID Mata Pelajaran</label>
 
                 <div class="col-md-9">
-                    <input id="makul_id" type="text" class="form-control" name="makul_id" value='{{$jadwallab->makul_id}}' required autofocus>
+                    <input id="makul_id" type="text" class="form-control" name="makul_id" value='{{$jadwallab->makul_id}}' required autofocus disabled> 
 
                     @if ($errors->has('makul_id'))
                         <span class="help-block">
@@ -28,7 +28,7 @@
                 <label for="jampel" class="col-sm-2 control-label">Jam Pelajaran</label>
 
                 <div class="col-md-9">
-                    <input id="jampel" type="text" class="form-control" name="jampel" value='{{$jadwallab->jampel}}' disabled>
+                    <input id="jampel" type="text" class="form-control" name="jampel" value='{{$jadwallab->jampel}}' >
 
                     @if ($errors->has('jampel'))
                         <span class="help-block">
@@ -43,7 +43,7 @@
                 <label for="makul" class="col-sm-2 control-label">Mata Kuliah</label>
 
                 <div class="col-md-9">
-                <select name="makul_id" id="makul_id" class="form-control select2" disabled>
+                <select name="makul_id" id="makul_id" class="form-control select2" >
                         <option name="makul_id" id="makul_id" value="">---Select Makul---</option>
                         @foreach($makul as $makulku )
                          <option name="makul_id" id="makul_id" value="{{$makulku->id}}" {{ $jadwallab->makul_id  == $makulku->id ? 'selected' : '' }}  > {{$makulku->nama_makul}} </option>
@@ -61,7 +61,7 @@
                 <label for="kelas" class="col-sm-2 control-label">Kelas</label>
 
                 <div class="col-md-9">
-                <select name="kelas_id" id="kelas_id" class="form-control select2" disabled>
+                <select name="kelas_id" id="kelas_id" class="form-control select2" >
                         <option name="kelas_id" id="kelas_id" value="">---Select Kelas---</option>
                         @foreach($kelas as $kelasku )
                          <option name="kelas_id" id="kelas_id" value="{{$kelasku->id}}" {{ $jadwallab->kelas_id  == $kelasku->id ? 'selected' : '' }}  > {{$kelasku->nama_kelas}} </option>
@@ -79,7 +79,7 @@
                 <label for="dosen" class="col-sm-2 control-label">Dosen</label>
 
                 <div class="col-md-9">
-                <select name="dosen_id" id="dosen_id" class="form-control select2" disabled>
+                <select name="dosen_id" id="dosen_id" class="form-control select2">
                         <option name="dosen_id" id="dosen_id" value="">---Select Dosen---</option>
                         @foreach($dosen as $dosenku )
                          <option name="dosen_id" id="dosen_id" value="{{$dosenku->id}}" {{ $jadwallab->dosen_id  == $dosenku->id ? 'selected' : '' }}  > {{$dosenku->nama_dosen}} </option>
@@ -92,20 +92,12 @@
                     @endif
                 </div>
             </div>
-
-           
-
-           
             <div class="card-footer">
                
                     <div class="form-group ">
                         <button type="submit" class="btn btn-primary float-right">
                                         Edit</button> </form>
-<<<<<<< HEAD
                         <form action="{{route('lab.index')}}"><button type="submit" class="btn btn-primary pull-left">Back To List Jadwal Lab</button></form>
-=======
-                        <form action="{{route('lab.index')}}"><button type="submit" class="btn btn-primary pull-left">Back To List Jadwallab</button></form>
->>>>>>> origin
                     </div>
                 </div>
             </div>
