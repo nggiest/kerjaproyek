@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Jadwallab;
 use App\Hari;
 use App\Makul;
+use App\Dosen;
 use DB;
 use Validator;
 
@@ -134,15 +135,10 @@ class JadwallabController extends Controller
     public function show($id)
     {
         $jadwallab=Jadwallab::findOrFail($id);
-        $jadwallab=DB::table('jadwallab')
-                    ->join('makul','jadwallab.makul,id','=','makul.id')
-                    ->join('hari','jadwallab.hari_id','=','hari.id')
-                    ->join('kelas','jadwallab.kelas_id','=','kelas.id')
-                    ->join('dosen','jadwallab.dosen_id','=','dosen.id')
-                    ->select('jadwallab.*','hari.id as hari','makul.id as makul','kelas.id as kelas','dosen.id as dosen')
-                    ->get();
+        $makul = Makul::All();
+        $dosen = Dosen::all();
         
-        return view('jadwallab.detail', compact('jadwallab'));
+        return view('jadwallabs.detail', compact('jadwallab','dosen','makul'));
     }
 
     /**
@@ -154,7 +150,7 @@ class JadwallabController extends Controller
     public function edit($id)
     {
         $jadwallab=Jadwallab::findOrFail($id);
-        return view('jadwallab.edit', compact('jadwallab'));
+        return view('jadwallabs.edit', compact('jadwallab'));
 
     }
 
