@@ -135,14 +135,14 @@ class JadwallabController extends Controller
     {
         $jadwallab=Jadwallab::findOrFail($id);
         $jadwallab=DB::table('jadwallab')
-                    ->join('makul','jadwallab.makul,id','=','makul.id')
+                    ->join('makul','jadwallab.makul_id','=','makul.id')
                     ->join('hari','jadwallab.hari_id','=','hari.id')
                     ->join('kelas','jadwallab.kelas_id','=','kelas.id')
                     ->join('dosen','jadwallab.dosen_id','=','dosen.id')
                     ->select('jadwallab.*','hari.id as hari','makul.id as makul','kelas.id as kelas','dosen.id as dosen')
                     ->get();
         
-        return view('jadwallab.detail', compact('jadwallab'));
+        return view('jadwallabs.detail', compact('jadwallab'));
     }
 
     /**
