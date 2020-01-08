@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Jadwallab;
 use App\Hari;
 use App\Makul;
+use App\Dosen;
+use App\Kelas;
 use DB;
 use Validator;
 
@@ -94,12 +96,12 @@ class JadwallabController extends Controller
     }
 
     /**
+     {
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
+    public function create(){
         $jadwallab = Jadwallab::all();
         $this->validate($request, [
             'jenis_barang' => 'required|string|min:2|max:128',
@@ -111,8 +113,9 @@ class JadwallabController extends Controller
             'jumlah' => $request['jumlah'],
             'update_by' => $request['update_by'],
             ]);
-            
+
     }
+        
 
     /**
      * Store a newly created resource in storage.
@@ -134,6 +137,9 @@ class JadwallabController extends Controller
     public function show($id)
     {
         $jadwallab=Jadwallab::findOrFail($id);
+        $makul = Makul::All();
+        $dosen = Dosen::all();
+        $hari = Hari::All();
         $jadwallab=DB::table('jadwallab')
                     ->join('makul','jadwallab.makul_id','=','makul.id')
                     ->join('hari','jadwallab.hari_id','=','hari.id')
@@ -141,8 +147,7 @@ class JadwallabController extends Controller
                     ->join('dosen','jadwallab.dosen_id','=','dosen.id')
                     ->select('jadwallab.*','hari.id as hari','makul.id as makul','kelas.id as kelas','dosen.id as dosen')
                     ->get();
-        
-        return view('jadwallabs.detail', compact('jadwallab'));
+        return view('jadwallabs.detail', compact('jadwallab','dosen','makul'));
     }
 
     /**
@@ -154,7 +159,11 @@ class JadwallabController extends Controller
     public function edit($id)
     {
         $jadwallab=Jadwallab::findOrFail($id);
-        return view('jadwallabs.edit', compact('jadwallab'));
+        $makul=Makul::all();
+        $dosen=Dosen::all();
+        $hari=Hari::all();
+        $kelas=Kelas::all();
+        return view('jadwallabs.edit', compact('jadwallab','makul','dosen','hari','kelas'));
 
     }
 
