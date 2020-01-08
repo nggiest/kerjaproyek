@@ -133,7 +133,16 @@ class JadwallabController extends Controller
      */
     public function show($id)
     {
-        //
+        $jadwallab=Jadwallab::findOrFail($id);
+        $jadwallab=DB::table('jadwallab')
+                    ->join('makul','jadwallab.makul,id','=','makul.id')
+                    ->join('hari','jadwallab.hari_id','=','hari.id')
+                    ->join('kelas','jadwallab.kelas_id','=','kelas.id')
+                    ->join('dosen','jadwallab.dosen_id','=','dosen.id')
+                    ->select('jadwallab.*','hari.id as hari','makul.id as makul','kelas.id as kelas','dosen.id as dosen')
+                    ->get();
+        
+        return view('jadwallab.detail', compact('jadwallab'));
     }
 
     /**
@@ -144,7 +153,9 @@ class JadwallabController extends Controller
      */
     public function edit($id)
     {
-        //
+        $jadwallab=Jadwallab::findOrFail($id);
+        return view('jadwallab.edit', compact('jadwallab'));
+
     }
 
     /**
@@ -156,7 +167,14 @@ class JadwallabController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $jadwallab=Jadwallab::findOrFail($id);
+        $jadwallab->update([
+            'makul_id' => $request['makul_id'],
+            'dosen_id' => $request['dosen_id'],
+            'kelas_id' => $request['kelas_id'],
+            'hari_id' => $request['hari_id'],
+            'jampel' => $request['jampel'],
+        ]);
     }
 
     /**
