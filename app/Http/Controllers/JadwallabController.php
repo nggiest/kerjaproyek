@@ -7,6 +7,7 @@ use App\Jadwallab;
 use App\Hari;
 use App\Makul;
 use App\Dosen;
+use App\Kelas;
 use DB;
 use Validator;
 
@@ -150,7 +151,11 @@ class JadwallabController extends Controller
     public function edit($id)
     {
         $jadwallab=Jadwallab::findOrFail($id);
-        return view('jadwallabs.edit', compact('jadwallab'));
+        $makul=Makul::all();
+        $dosen=Dosen::all();
+        $hari=Hari::all();
+        $kelas=Kelas::all();
+        return view('jadwallabs.edit', compact('jadwallab','makul','dosen','hari','kelas'));
 
     }
 

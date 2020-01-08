@@ -98,7 +98,7 @@ class JadwalAslabController extends Controller
      */
     public function edit($id)
     {
-<<<<<<< HEAD
+
         $jadwalaslab=JadwalAslab::find($id);
         $user=User::All();
         $hari=Hari::All();
@@ -106,13 +106,13 @@ class JadwalAslabController extends Controller
     
      
         return view('jadwalaslabs.edit', compact('jadwalaslab','user','hari','aslabjab'));
-=======
+
         $jadwalaslab=JadwalAslab::findOrFail($id);
         $user=User::where('role','=', 2 )->get();
         $hari=Hari::all();
         $aslabjab=AslabJab::all();
         return view('jadwalaslabs.edit',compact('jadwalaslab', 'user', 'hari','aslabjab'));
->>>>>>> 5bab5c2b071842d7616c5e2f7255df5f4e3ae7ed
+
     }
 
     /**
