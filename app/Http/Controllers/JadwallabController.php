@@ -154,7 +154,7 @@ class JadwallabController extends Controller
     public function edit($id)
     {
         $jadwallab=Jadwallab::findOrFail($id);
-        return view('jadwallab.edit', compact('jadwallab'));
+        return view('jadwallabs.edit', compact('jadwallab'));
 
     }
 
