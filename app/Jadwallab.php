@@ -12,15 +12,15 @@ class Jadwallab extends Model
         'hari_id', 'jampel' , 'makul', 'kelas' , 'dosen',
     ];
 
-    public function hari(){
+    public function haris(){
         return $this->belongTo(App\Hari);
     }
 
-    public function makul(){
+    public function makuls(){
         return $this->belongTo(App\Makul);
     }
 
-    public function dosen(){
+    public function dosens(){
         return $this->belongTo(App\Dosen);
     }
 

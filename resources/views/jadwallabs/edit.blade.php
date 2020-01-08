@@ -4,20 +4,16 @@
 <div class="card-header">
 <div class="card-title"> <h3 style="text-align:center"> Edit Data Lab </h3> </div> </div>
     <div class="card-body">
-        <form class="form-horizontal" method="POST" action="{{ route('aslab.update', $jadwallab->id ) }}">
+        <form class="form-horizontal" method="POST" action="{{ route('lab.update', $jadwallab->id ) }}">
         {{ method_field('PUT') }}
              {{ csrf_field() }}
 
              <div class="form-group{{ $errors->has('hari_id') ? ' has-error' : '' }}">
-                <label for="activation" class="col-sm-2 control-label">Activation Status</label>
+                <label for="activation" class="col-sm-2 control-label">Hari </label> 
                 <div class="col-md-9">
                     <select name="hari_id" id="hari_id" class="form-control select2" >
-                        <option name="hari_id" id="hari_id" value="">---Select Status---</option>
-                        <option name="hari_id" id="hari_id" value="{{$data = 1 }}" {{ $user->hari_id  == $data ? 'selected' : '' }}> Senin </option>
-                        <option name="hari_id" id="hari_id" value="{{$data = 2 }}" {{ $user->hari_id  == $data ? 'selected' : '' }}> Selasa </option>
-                        <option name="hari_id" id="hari_id" value="{{$data = 3 }}" {{ $user->hari_id  == $data ? 'selected' : '' }}> Rabu </option>
-                        <option name="hari_id" id="hari_id" value="{{$data = 4 }}" {{ $user->hari_id  == $data ? 'selected' : '' }}> Kamis </option>
-                        <option name="hari_id" id="hari_id" value="{{$data = 5 }}" {{ $user->hari_id  == $data ? 'selected' : '' }}> Jumat </option>
+                        <option name="hari_id" id="hari_id" value="">---Select Hari---</option>
+                       
                     </select>
                     @if ($errors->has('hari_id'))
                         <span class="help-block">
@@ -92,8 +88,8 @@
                
                     <div class="form-group ">
                         <button type="submit" class="btn btn-primary float-right">
-                                        Create</button> </form>
-                        <form action="{{route('jadwallab.index')}}"><button type="submit" class="btn btn-primary pull-left">Back To List Jadwallab</button></form>
+                                        Edit</button> </form>
+                        <form action="{{route(' lab.index')}}"><button type="submit" class="btn btn-primary pull-left">Back To List Jadwallab</button></form>
                     </div>
                 </div>
             </div>
