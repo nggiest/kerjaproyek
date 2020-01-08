@@ -10,6 +10,7 @@ use App\AslabJab;
 use DB;
 use Auth;
 use Validator;
+use Alert;
 
 class JadwalAslabController extends Controller
 {
@@ -52,8 +53,12 @@ class JadwalAslabController extends Controller
     public function create()
     {
         $hari=Hari::all();
-        $users=User::all();
-        return view('jadwalaslabs.create', compact('hari','users'));
+        $user=User::where('role','=', 2 )->get();
+        $hari=Hari::all();
+        $aslabjab=AslabJab::all();
+        return view('jadwalaslabs.create', compact('hari','user','aslabjab'));
+
+        
     }
 
     /**
@@ -64,14 +69,14 @@ class JadwalAslabController extends Controller
      */
     public function store(Request $request)
     {
-        //return $request;
-        foreach($request->users_id as $aslab) {
-            
-            $dxx = JadwalAslab::create([
-                'hari_id' => $request->hari_id,
-                'project_id' => $request->users_id,
-                ]);
-        }
+        $jadwalaslab=JadwalAslab::all($id);
+        // return $request;
+        $jadwalaslab->create([
+            'users_id' => $request['users_id'],
+            'aslabjab' => $request['aslabjab'],
+            'hari_id' => $request['hari_id'],
+        ]);
+
     }
 
     /**
@@ -93,6 +98,7 @@ class JadwalAslabController extends Controller
      */
     public function edit($id)
     {
+<<<<<<< HEAD
         $jadwalaslab=JadwalAslab::find($id);
         $user=User::All();
         $hari=Hari::All();
@@ -100,6 +106,13 @@ class JadwalAslabController extends Controller
     
      
         return view('jadwalaslabs.edit', compact('jadwalaslab','user','hari','aslabjab'));
+=======
+        $jadwalaslab=JadwalAslab::findOrFail($id);
+        $user=User::where('role','=', 2 )->get();
+        $hari=Hari::all();
+        $aslabjab=AslabJab::all();
+        return view('jadwalaslabs.edit',compact('jadwalaslab', 'user', 'hari','aslabjab'));
+>>>>>>> 5bab5c2b071842d7616c5e2f7255df5f4e3ae7ed
     }
 
     /**
@@ -111,7 +124,14 @@ class JadwalAslabController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $jadwalaslab=JadwalAslab::findOrFail($id);
+        // return $request;
+        $jadwalaslab->update([
+            'users_id' => $request['users_id'],
+            'aslabjab' => $request['aslabjab'],
+        ]);
+
+        return redirect()->route('aslab.index');
     }
 
     /**

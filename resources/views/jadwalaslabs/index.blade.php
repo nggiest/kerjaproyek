@@ -30,8 +30,7 @@
                     <tr>
                     <td style="text-align:center">Sesi 1</td>
                     @foreach($jadwalaslab1 as $jab1 )
-                      <td style="text-align:center">@if(Auth::User())
-                      <a href="{{route('aslab.edit',$jab1->id)}}">{{$jab1->nama}}</a>
+                      <td style="text-align:center">@if(Auth::User())   <a href="{{route('aslab.edit',$jab1->id)}}"> {{$jab1->nama}}
                       @else
                       {{$jab1->nama}}
                       @endif
@@ -40,7 +39,7 @@
                     <tr>
                     <td style="text-align:center">Sesi 2</td>
                     @foreach($jadwalaslab2 as $jab2 )
-                      <td style="text-align:center">@if(Auth::User())
+                      <td style="text-align:center">@if(Auth::User()) 
                       <a href="{{route('aslab.edit',$jab2->id)}}">{{$jab2->nama}}</a>
                       @else
                       {{$jab2->nama}} @endif</td>

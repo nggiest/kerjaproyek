@@ -6,5 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Dosen extends Model
 {
-    //
+    public $table = 'dosen';
+
+    public function jadwallab(){
+        return $this->hasMany(App\Jadwallab);
+    }
 }

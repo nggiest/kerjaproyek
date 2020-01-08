@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Jadwallab;
 use App\Hari;
+use App\Makul;
 use DB;
 use Validator;
 
@@ -17,8 +18,79 @@ class JadwallabController extends Controller
      */
     public function index()
     {
-        $jadwallab = Jadwallab::all();
-        return view('jadwallabs.index', compact('jadwallab'));
+        $lab = Jadwallab::all();
+        $lab1= DB::table('jadwallab')
+        ->join('makul','jadwallab.makul_id','=','makul.id')
+        ->join('hari','jadwallab.hari_id','=','hari.id')
+        ->select('jadwallab.*','makul.nama_makul as nama')
+        ->where('jadwallab.jampel','1')
+        ->orderBy('hari.id')
+        ->get();
+        $lab2= DB::table('jadwallab')
+        ->join('makul','jadwallab.makul_id','=','makul.id')
+        ->join('hari','jadwallab.hari_id','=','hari.id')
+        ->select('jadwallab.*','makul.nama_makul as nama')
+        ->where('jadwallab.jampel','2')
+        ->orderBy('hari.id')
+        ->get();
+        $lab3= DB::table('jadwallab')
+        ->join('makul','jadwallab.makul_id','=','makul.id')
+        ->join('hari','jadwallab.hari_id','=','hari.id')
+        ->select('jadwallab.*','makul.nama_makul as nama')
+        ->where('jadwallab.jampel','3')
+        ->orderBy('hari.id')
+        ->get();
+        $lab4= DB::table('jadwallab')
+        ->join('makul','jadwallab.makul_id','=','makul.id')
+        ->join('hari','jadwallab.hari_id','=','hari.id')
+        ->select('jadwallab.*','makul.nama_makul as nama')
+        ->where('jadwallab.jampel','4')
+        ->orderBy('hari.id')
+        ->get();
+        $lab5= DB::table('jadwallab')
+        ->join('makul','jadwallab.makul_id','=','makul.id')
+        ->join('hari','jadwallab.hari_id','=','hari.id')
+        ->select('jadwallab.*','makul.nama_makul as nama')
+        ->where('jadwallab.jampel','5')
+        ->orderBy('hari.id')
+        ->get();
+        $lab6= DB::table('jadwallab')
+        ->join('makul','jadwallab.makul_id','=','makul.id')
+        ->join('hari','jadwallab.hari_id','=','hari.id')
+        ->select('jadwallab.*','makul.nama_makul as nama')
+        ->where('jadwallab.jampel','6')
+        ->orderBy('hari.id')
+        ->get();
+        $lab7= DB::table('jadwallab')
+        ->join('makul','jadwallab.makul_id','=','makul.id')
+        ->join('hari','jadwallab.hari_id','=','hari.id')
+        ->select('jadwallab.*','makul.nama_makul as nama')
+        ->where('jadwallab.jampel','7')
+        ->orderBy('hari.id')
+        ->get();
+        $lab8= DB::table('jadwallab')
+        ->join('makul','jadwallab.makul_id','=','makul.id')
+        ->join('hari','jadwallab.hari_id','=','hari.id')
+        ->select('jadwallab.*','makul.nama_makul as nama')
+        ->where('jadwallab.jampel','8')
+        ->orderBy('hari.id')
+        ->get();
+        $lab9= DB::table('jadwallab')
+        ->join('makul','jadwallab.makul_id','=','makul.id')
+        ->join('hari','jadwallab.hari_id','=','hari.id')
+        ->select('jadwallab.*','makul.nama_makul as nama')
+        ->where('jadwallab.jampel','9')
+        ->orderBy('hari.id')
+        ->get();
+        $lab10= DB::table('jadwallab')
+        ->join('makul','jadwallab.makul_id','=','makul.id')
+        ->join('hari','jadwallab.hari_id','=','hari.id')
+        ->select('jadwallab.*','makul.nama_makul as nama')
+        ->where('jadwallab.jampel','10')
+        ->orderBy('hari.id')
+        ->get();
+
+        return view('jadwallabs.index', compact('lab1','lab2','lab3','lab4','lab5','lab6','lab7','lab8','lab9','lab10'));
     }
 
     /**
@@ -34,7 +106,7 @@ class JadwallabController extends Controller
             'jumlah' => 'required',
         ]);
 
-       $inventaris =  Inventaris::create([
+       $jadwallab =  Jadwallab::create([
             'jenis_barang' => $request['jenis_barang'],
             'jumlah' => $request['jumlah'],
             'update_by' => $request['update_by'],
@@ -61,7 +133,16 @@ class JadwallabController extends Controller
      */
     public function show($id)
     {
-        //
+        $jadwallab=Jadwallab::findOrFail($id);
+        $jadwallab=DB::table('jadwallab')
+                    ->join('makul','jadwallab.makul,id','=','makul.id')
+                    ->join('hari','jadwallab.hari_id','=','hari.id')
+                    ->join('kelas','jadwallab.kelas_id','=','kelas.id')
+                    ->join('dosen','jadwallab.dosen_id','=','dosen.id')
+                    ->select('jadwallab.*','hari.id as hari','makul.id as makul','kelas.id as kelas','dosen.id as dosen')
+                    ->get();
+        
+        return view('jadwallab.detail', compact('jadwallab'));
     }
 
     /**
@@ -72,7 +153,9 @@ class JadwallabController extends Controller
      */
     public function edit($id)
     {
-        //
+        $jadwallab=Jadwallab::findOrFail($id);
+        return view('jadwallabs.edit', compact('jadwallab'));
+
     }
 
     /**
@@ -84,7 +167,14 @@ class JadwallabController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $jadwallab=Jadwallab::findOrFail($id);
+        $jadwallab->update([
+            'makul_id' => $request['makul_id'],
+            'dosen_id' => $request['dosen_id'],
+            'kelas_id' => $request['kelas_id'],
+            'hari_id' => $request['hari_id'],
+            'jampel' => $request['jampel'],
+        ]);
     }
 
     /**
