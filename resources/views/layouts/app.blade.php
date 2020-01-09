@@ -79,7 +79,7 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="{{route('home')}}" class="brand-link">
+    <a href="{{route('lab.index')}}" class="brand-link">
       <span class="brand-text font-weight-light">SI Labkom</span>
     </a>
 
@@ -111,7 +111,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{route('home')}}" class="nav-link">
+                <a href="{{route('lab.index')}}" class="nav-link">
                   <i class=" far fa-circle nav-icon"></i>
                   <p>Jadwal Penggunaan Lab</p>
                 </a>
