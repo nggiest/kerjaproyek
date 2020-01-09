@@ -28,6 +28,7 @@
                 <label for="nim" class="col-sm-2 control-label">NIM</label>
 
                 <div class="col-md-9">
+            </div>
                     <input id="nim" type="text" class="form-control" name="nim" value='{{$user->nim}}' required autofocus>
 
                     @if ($errors->has('nim'))
@@ -36,7 +37,6 @@
                         </span>
                     @endif
                 </div>
-            </div>
 
             <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                 <label for="email" class="col-sm-2 control-label">E-Mail Address</label>

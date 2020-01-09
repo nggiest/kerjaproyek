@@ -26,7 +26,7 @@
             @if(Auth::user()->role == 1 )
             <th style="text-align:center" >Petugas Pelapor</th>
             @endif
-            <th colspan="3" style="text-align:center">Action</th>
+            <th colspan="2" style="text-align:center">Action</th>
                       
           </tr>
         </thead>
@@ -46,6 +46,11 @@
                 @endif
                 <td style="text-align:center"> <form action="{{route('daily.edit', $daily->id)}}">  
                  <button class="btn btn-success" type="submit" value="Edit"> <i class="far fa-edit"> </i> Edit </button> </form> </td> 
+                 <td><form action="{{route('daily.destroy', $daily->id)}}" method="POST">
+                        {{csrf_field()}}
+                        {{method_field('DELETE')}}
+                        <button class="btn btn-success" type="submit" value="Delete"> Delete </button>
+                        </form></td>
             </tr>
             @endforeach
         </tbody>

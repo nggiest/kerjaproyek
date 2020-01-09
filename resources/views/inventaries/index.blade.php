@@ -13,7 +13,7 @@
         <div class="row">
             <div class="col-sm-12">
             <div class="col-sm-12"><form action="{{route('inventaris.create')}}">
-            <button type="submit" class="btn btn-success btn-sm float-right"> <i class="fas fa-plus-circle"> </i>  Tambah Laporan Baru </button> 
+            <button type="submit" class="btn btn-success btn-sm float-right"> <i class="fas fa-plus-circle"> </i>  Tambah Data Baru </button> 
             </form></div>
              </div>
                 <table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
@@ -22,7 +22,7 @@
                         <th style="text-align:center" class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">No</th>
                         <th style="text-align:center" class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending">Jenis Barang</th>
                         <th style="text-align:center" class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending">Jumlah</th>
-                        <th style="text-align:center" class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="2" aria-label="CSS grade: activate to sort column ascending">Action</th>
+                        <th style="text-align:center" class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="3" aria-label="CSS grade: activate to sort column ascending">Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -38,11 +38,17 @@
                         <td style="text-align:center"> <form action="{{route('inventaris.edit', $inventaries->id)}}">  
                         <button class="btn btn-success" type="submit" value="Edit"> Edit </button> </form></td>
                         <td style="text-align:center"><form action="{{route('inventaris.show', $inventaries->id)}}">  
-                        <button class="btn btn-success" type="submit" value="Detail"> Detail </button> </form>
-                         </td>
+                        <button class="btn btn-success" type="submit" value="Detail"> Detail </button> </form></td>
+                        <td><form action="{{route('inventaris.destroy', $inventaries->id)}}" method="POST">
+                        {{csrf_field()}}
+                        {{method_field('DELETE')}}
+                        <button class="btn btn-success" type="submit" value="Delete"> Delete </button>
+                        </form></td>
                     @endforeach
                       </tr>
                     </tbody>
+
+                    
                     
                 </table>
             </div>

@@ -137,7 +137,7 @@ class ReportDailyController extends Controller
             'report_note' => $request['report_note'],
         ]);
         
-       //return redirect()->route('daily.index');
+       return redirect()->route('daily.index');
     }
 
     /**
@@ -148,6 +148,8 @@ class ReportDailyController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $reportdaily=ReportDaily::findOrFail($id);
+        $reportdaily->delete();
+        return redirect()->route('daily.index');
     }
 }

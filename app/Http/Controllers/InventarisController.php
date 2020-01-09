@@ -115,5 +115,6 @@ class InventarisController extends Controller
     {
         $inventaris = Inventaris::findOrFail($id);
         $inventaris->delete();
+        return redirect()->route('inventaris.index');
     }
 }
