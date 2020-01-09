@@ -9,7 +9,7 @@ class Jadwallab extends Model
     public $table = 'jadwallab';
 
     protected $fillable = [
-        'hari_id', 'jampel' , 'makul', 'kelas' , 'dosen',
+        'hari_id', 'jampel' , 'makul_id', 'kelas_id' , 'dosen_id',
     ];
 
     public function haris(){

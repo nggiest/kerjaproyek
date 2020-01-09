@@ -164,7 +164,7 @@ class JadwallabController extends Controller
         $dosen=Dosen::all();
         $hari=Hari::all();
         $kelas=Kelas::all();
-        return view('jadwallabs.edit', compact('jadwallab','makul','dosen','hari','kelas'));
+        return view('jadwallabs.edit', compact("jadwallab","makul","dosen","hari","kelas"));
 
     }
 
@@ -182,9 +182,10 @@ class JadwallabController extends Controller
             'makul_id' => $request['makul_id'],
             'dosen_id' => $request['dosen_id'],
             'kelas_id' => $request['kelas_id'],
-            'hari_id' => $request['hari_id'],
-            'jampel' => $request['jampel'],
-        ]);
+            
+            ]);
+            // return $request;
+        return redirect()->route('lab.index');
     }
 
     /**

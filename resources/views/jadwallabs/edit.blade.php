@@ -4,20 +4,22 @@
 <div class="card-header">
 <div class="card-title"> <h3 style="text-align:center"> Edit Jadwal Penggunaan Lab </h3> </div> </div>
     <div class="card-body">
-        <form class="form-horizontal" method="POST" action="{{ route('lab.update', $jadwallab->id ) }}">
-        {{ method_field('PUT') }}
-             {{ csrf_field() }}
+    <form method="POST" action="{{ route('lab.update', $jadwallab->id)}}">
+    {{ method_field('PUT') }}
+      {{ csrf_field() }}
 
-             <div class="form-group{{ $errors->has('jampel') ? ' has-error' : '' }}">
-
-                <label for="makul_id" class="col-sm-2 control-label">ID Mata Pelajaran</label>
-
+             <div class="form-group{{ $errors->has('hari') ? ' has-error' : '' }}">
+                <label for="hari" class="col-sm-2 control-label">Hari</label>
                 <div class="col-md-9">
-                    <input id="makul_id" type="text" class="form-control" name="makul_id" value='{{$jadwallab->makul_id}}' required autofocus disabled> 
-
-                    @if ($errors->has('makul_id'))
+                    <select name="hari_id" id="hari_id" class="form-control select2" disabled>
+                        <option name="hari_id" id="hari_id" value="">---Pilih Hari---</option>
+                        @foreach($hari as $hariku )
+                        <option name="hari_id" id="hari_id" value="{{$hariku->id}}" {{ $jadwallab->hari_id  == $hariku->id ? 'selected' : '' }}  > {{$hariku->nama_hari}} </option>
+                    @endforeach
+                    </select>
+                    @if ($errors->has('hari'))
                         <span class="help-block">
-                            <strong>{{ $errors->first('makul_id') }}</strong>
+                            <               strong>{{ $errors->first('hari') }}</strong>
                         </span>
                     @endif
                 </div>
@@ -28,7 +30,7 @@
                 <label for="jampel" class="col-sm-2 control-label">Jam Pelajaran</label>
 
                 <div class="col-md-9">
-                    <input id="jampel" type="text" class="form-control" name="jampel" value='{{$jadwallab->jampel}}' >
+                    <input id="jampel" type="text" class="form-control" name="jampel" value='{{$jadwallab->jampel}}' disabled>
 
                     @if ($errors->has('jampel'))
                         <span class="help-block">
