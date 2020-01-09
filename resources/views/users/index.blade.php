@@ -7,9 +7,11 @@
     <div class="card-body">
         <div id="example2_wrapper" class="dataTables_wrapper dt-bootstrap4">
             <div class="row">
+            @if(Auth::user()->role == 1 )
             <div class="col-sm-12"><form action="{{route('user.create')}}">
         <button type="submit" class="btn btn-warning btn-sm float-right"> <i class="fas fa-plus-circle"> </i>  Tambah Pengguna Baru </button> 
         </form></div>
+        @endif
             <div class="col-sm-12 col-md-6"></div>
         </div>
         
