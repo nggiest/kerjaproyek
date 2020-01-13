@@ -7,16 +7,16 @@
       {{ csrf_field() }}
       <input type="hidden" name="_method" value="PATCH">
             <div class="card card-primary">
-                <div class="card-header"><h3 style="text-align:center">Ubah Laporan Harian </h3></div>
+                <div class="card-header"><h3 style="text-align:center">Ubah Catatan Harian </h3></div>
             </div>
             <div id="card-activities" class="">
             <div class="card card-primary cloningan" id="myactivities">
-                  <h3 style="text-align:center"> Laporan
+                  <h3 style="text-align:center"> Catatan
                   </h3>
                   <div class="card-body" id="activitycard">
                     <div class="form-horizontal">
                       <div class="form-group">
-                        <label for="" class="col-md-2">Rincian Laporan</label>
+                        <label for="" class="col-md-2">Rincian Catatan Harian</label>
                           <div class="col-md-9">
                         <input type="text" class="form-control ini" id="report_note" name="report_note" value="{{$reportdaily->report_note}}">
                           </div>

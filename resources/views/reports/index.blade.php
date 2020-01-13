@@ -3,12 +3,12 @@
 @section('content')
 <div class="card card-primary">
   <div class="card-header">
-  <div class="card-title"> <h3 style="text-align:center"> Laporan Harian</h3> 
+  <div class="card-title"> <h3 style="text-align:center"> Catatan Harian</h3> 
   </div>
   </div>
   <div class="card-body">
   <div class="col-sm-12"><form action="{{route('daily.create')}}">
-        <button type="submit" class="btn btn-success btn-sm float-right"> <i class="fas fa-plus-circle"> </i>  Tambah Laporan Baru </button> 
+        <button type="submit" class="btn btn-success btn-sm float-right"> <i class="fas fa-plus-circle"> </i>  Tambah Catatan Baru </button> 
         </form></div>
   </div>
   {{csrf_field()}}

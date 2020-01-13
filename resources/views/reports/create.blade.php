@@ -4,7 +4,7 @@
 <div class="container">
     <form id="giomales" method="POST" action="{{ route('daily.store')}}">
             <div class="card card-primary">
-                <div class="card-header"><h3 style="text-align:center">Buat Laporan Harian </h3></div>
+                <div class="card-header"><h3 style="text-align:center">Buat Catatan Harian </h3></div>
                 <div class="card-body">
                     <div class="form-horizontal" >
                         {{ csrf_field() }}
@@ -21,7 +21,7 @@
             <button type ="button" class="btn btn-success" id="button1"> <i class="fa fa-plus-circle"> </i> Aktivitas </button> <br> <br>
             <div id="card-activities" class="">
             <div class="card card-primary cloningan" id="myactivities">
-                  <h3 style="text-align:center"> Laporan
+                  <h3 style="text-align:center"> Catatan
                   <button class="btn btn-card-tool float-right delbutton" type="button"><i class="fas fa-trash"></i></button> 
                   </h3>
                   <div class="card-body" id="activitycard">
